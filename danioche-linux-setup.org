@@ -7,9 +7,10 @@
 This document should be used to help to configure *any* Ubuntu distro to working-distro with the most common set-up that I'm used to. 
 Main tools, corporate and productivity tools, and of course look&feel from a preconfigured repo.
 
-The structure that I want is a private repository that will have all the scripts needed to config the new distro.
+* This repo and what's inside
 
-This entire file is a literate document so once you installed Emacs and Spacemacs you will be able to execute the configurations as you wish.
+The structure that I want is a private repository that will have all the scripts needed to config the new distro.
+Obviously what is inside is this main ORG file, that is a literate document; so once you installed Emacs and Spacemacs you will be able to execute the configurations as you wish.
 
 Summarizing, the step-0 is to have git.
 
@@ -18,8 +19,12 @@ Summarizing, the step-0 is to have git.
 git version
 
 #+end_src
+#+RESULTS:
+: git version 2.17.1
 
-If Ctr+C Ctr+C does not works showing you the following message: "Evaluation of this sh code block is disabled" then we should check security opitions
+If Ctr+C Ctr+C does not works showing you the following message: "Evaluation of this sh code block is disabled" then you may have a problem on configuration here is a trick:
+
+ - https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
 
 
 #+begin_src sh
@@ -27,16 +32,20 @@ If Ctr+C Ctr+C does not works showing you the following message: "Evaluation of 
 sudo apt-get install git
 
 #+end_src
+#+RESULTS:
 
-/If you don't have emacs configured you will not be able to execute here the code above./
+/*Obviously*: If you don't have emacs installed and configured you will not be able to execute here the code above, so you may want to visit next section./
+
+
+
 
 * Tools
 
-** Main tool EMACS and favorite flavor spacemacs
+** Main tool EMACS, spacemacs flavored
 
 The main tool for taking the most of this document is EMACS, you want to have it installed.
 
-https://www.gnu.org/software/emacs/
+ - https://www.gnu.org/software/emacs/
 
 I'm using EMACS since 2017 for Instant Project Management, TimeSheet management, GTD and other cool stuff like to support this document.
 which is mostly the key for many features and tricks that I'm doing in my everyday work stream.
@@ -51,14 +60,15 @@ And the flavour that I like most is the *spacemacs* https://www.spacemacs.org/
 
 #+begin_src sh
 
-rm -rf ~/.emacs.d
+vm ~/.emacs.d ~/.emacs.d.old
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
 #+end_src
 
 With version 25 of EMACS in ubuntu i found an issue, related to signature update, if you find yourself again with this error you can solve it following the instructions:
 
-  - Link: https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
+ - https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
+
 
 
 * Terminal tune-up
@@ -79,7 +89,5 @@ sudo apt-get install fonts-powerline powerline
 
 
 * Tools tune-up
-
-
 
 
