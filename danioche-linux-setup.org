@@ -1,0 +1,85 @@
+#+TITLE: Danioche linux set-up
+#+AUTHOR: @danioche
+#+DATE: <2020-05-25 lun>
+
+* About
+
+This document should be used to help to configure *any* Ubuntu distro to working-distro with the most common set-up that I'm used to. 
+Main tools, corporate and productivity tools, and of course look&feel from a preconfigured repo.
+
+The structure that I want is a private repository that will have all the scripts needed to config the new distro.
+
+This entire file is a literate document so once you installed Emacs and Spacemacs you will be able to execute the configurations as you wish.
+
+Summarizing, the step-0 is to have git.
+
+#+begin_src sh
+
+git version
+
+#+end_src
+
+If Ctr+C Ctr+C does not works showing you the following message: "Evaluation of this sh code block is disabled" then we should check security opitions
+
+
+#+begin_src sh
+
+sudo apt-get install git
+
+#+end_src
+
+/If you don't have emacs configured you will not be able to execute here the code above./
+
+* Tools
+
+** Main tool EMACS and favorite flavor spacemacs
+
+The main tool for taking the most of this document is EMACS, you want to have it installed.
+
+https://www.gnu.org/software/emacs/
+
+I'm using EMACS since 2017 for Instant Project Management, TimeSheet management, GTD and other cool stuff like to support this document.
+which is mostly the key for many features and tricks that I'm doing in my everyday work stream.
+
+#+begin_src sh
+
+sudo apt-get install emacs
+
+#+end_src
+
+And the flavour that I like most is the *spacemacs* https://www.spacemacs.org/
+
+#+begin_src sh
+
+rm -rf ~/.emacs.d
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+#+end_src
+
+With version 25 of EMACS in ubuntu i found an issue, related to signature update, if you find yourself again with this error you can solve it following the instructions:
+
+  - Link: https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
+
+
+* Terminal tune-up
+
+Powerline is a very usefull aplication when you use git, I recommend to install it. More info at 
+
+#+begin_src sh
+
+sudo apt-get install fonts-powerline powerline
+
+#+end_src
+
+
+* Productivity
+
+* Destkop tune-up
+
+
+
+* Tools tune-up
+
+
+
+
