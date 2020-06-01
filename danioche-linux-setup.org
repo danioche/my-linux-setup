@@ -1,13 +1,22 @@
 #+TITLE: Danioche linux set-up
 #+AUTHOR: @danioche
 #+DATE: <2020-05-25 lun>
+#+MODIFIED: <2020-06-01 lun>
 
 * About
 
 This document should be used to help to configure *any* Ubuntu distro to working-distro with the most common set-up that I'm used to. 
 Main tools, corporate and productivity tools, and of course look&feel from a preconfigured repo.
 
-* This repo and what's inside
+#+ATTR_TEXTINFO: :author @danioche
+#+BEGIN_QUOTE
+
+All the shell code here comes without any warranty, execute it (or not) at your own risk.
+I assume that you understand the code, you can modify it, as always, at your own risk.
+
+#+END_QUOTE
+
+* This repo
 
 The structure that I want is a private repository that will have all the scripts needed to config the new distro.
 Obviously what is inside is this main ORG file, that is a literate document; so once you installed Emacs and Spacemacs you will be able to execute the configurations as you wish.
@@ -26,6 +35,9 @@ If Ctr+C Ctr+C does not works showing you the following message: "Evaluation of 
 
  - https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
 
+** Installing git
+
+The following command may be not fully working from this documentation, but you can copy-paste to install it.
 
 #+begin_src sh
 
@@ -34,16 +46,20 @@ sudo apt-get install git
 #+end_src
 #+RESULTS:
 
+If your Linux is brand new you may need to add your .rsa or create a new one for the nes OS, follow the instructions here:
+
+ - https://github.com/settings/keys
+
+ - Help info: 
+   - https://help.github.com/articles/generating-a-gpg-key/
+
 /*Obviously*: If you don't have emacs installed and configured you will not be able to execute here the code above, so you may want to visit next section./
-
-
-
 
 * Tools
 
-** Main tool EMACS, spacemacs flavored
+** Main tool EMACS, *spacemacs* flavored
 
-The main tool for taking the most of this document is EMACS, you want to have it installed.
+The main tool (a part from git :) for taking the most of this document is EMACS, you want to have it installed.
 
  - https://www.gnu.org/software/emacs/
 
@@ -58,18 +74,28 @@ sudo apt-get install emacs
 
 And the flavour that I like most is the *spacemacs* https://www.spacemacs.org/
 
+The following lines will move your current personal folder from emacs to back-up (just in case), and then will clone the latest stable repository for espacemacs.
+
 #+begin_src sh
 
-vm ~/.emacs.d ~/.emacs.d.old
+mv ~/.emacs.d ~/.emacs.d.old
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
 #+end_src
 
-With version 25 of EMACS in ubuntu i found an issue, related to signature update, if you find yourself again with this error you can solve it following the instructions:
+With version 25 of EMACS in Ubuntu 18 i found an issue, related to signature update, if you find yourself again with this error you can solve it following the instructions:
+
+You can check your linux version with the following code:
+
+#+begin_src sh
+
+uname -a
+
+#+end_src
+#+RESULTS:
+: Linux Pavilion 5.3.0-53-generic #47~18.04.1-Ubuntu SMP Thu May 7 13:10:50 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
 
  - https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
-
-
 
 * Terminal tune-up
 
@@ -81,11 +107,9 @@ sudo apt-get install fonts-powerline powerline
 
 #+end_src
 
-
 * Productivity
 
 * Destkop tune-up
-
 
 
 * Tools tune-up
