@@ -279,5 +279,18 @@ snap install spotify
 #+RESULTS:
 
 * Destkop
+
+** i3 tiling windows manager
+
+I'm just trying this, for me is good to have more focus on the work, avoiding disrruption and because of this I'm trying i3.
+
+I tricked some battery problems with the i3status bar, there is a .conf file in this repo that you can use:
+
+#+begin_src sh
+
+cp ./i3/.i3status.conf ~/
+
+#+end_src
+
 * Tools
 
