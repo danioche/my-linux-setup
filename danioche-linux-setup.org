@@ -8,6 +8,9 @@
 This document should be used to help to configure *any* Ubuntu distro to working-distro with the most common set-up that I'm used to. 
 Main tools, corporate and productivity tools, and of course look&feel from a preconfigured repo.
 
+Following literate documentation approach, inspiring post: http://cachestocaches.com/2018/6/org-literate-programming/ 
+
+
 #+ATTR_TEXTINFO: :author @danioche
 #+BEGIN_QUOTE
 
@@ -15,6 +18,58 @@ All the shell code here comes without any warranty, execute it (or not) at your 
 I assume that you understand the code, you can modify it, as always, at your own risk.
 
 #+END_QUOTE
+
+Bellow the latest commit mesage:
+
+#+begin_src sh
+
+git log -1 --pretty=%B
+
+#+end_src
+#+RESULTS:
+: Creation of first contents and check on code blocks
+
+** Check your space
+
+You may want to check your disk space befor continue on this customization:
+
+#+begin_src sh
+
+df -H
+
+#+end_src
+
+#+RESULTS:
+| S.ficheros     | Tamaño | Usados | Disp | Uso% | Montado                       | en |
+| udev           | 947M   | 0      | 947M |   0% | /dev                          |    |
+| tmpfs          | 197M   | 1      | 195M |   1% | /run                          |    |
+| /dev/mmcblk0p2 | 31G    | 12G    |  18G |  40% | /                             |    |
+| tmpfs          | 983M   | 123M   | 861M |  13% | /dev/shm                      |    |
+| tmpfs          | 5      | 4      |    5 |   1% | /run/lock                     |    |
+| tmpfs          | 983M   | 0      | 983M |   0% | /sys/fs/cgroup                |    |
+| /dev/loop1     | 132k   | 132k   |    0 | 100% | /snap/software-boutique/54    |    |
+| /dev/loop0     | 437M   | 437M   |    0 | 100% | /snap/libreoffice/180         |    |
+| /dev/loop2     | 169M   | 169M   |    0 | 100% | /snap/gnome-3-28-1804/116     |    |
+| /dev/loop3     | 437M   | 437M   |    0 | 100% | /snap/libreoffice/179         |    |
+| /dev/loop4     | 99M    | 99M    |    0 | 100% | /snap/core/9066               |    |
+| /dev/loop5     | 8      | 8      |    0 | 100% | /snap/pulsemixer/250          |    |
+| /dev/loop6     | 16M    | 16M    |    0 | 100% | /snap/ubuntu-mate-welcome/539 |    |
+| /dev/loop7     | 16M    | 16M    |    0 | 100% | /snap/ubuntu-mate-welcome/420 |    |
+| /dev/loop8     | 94M    | 94M    |    0 | 100% | /snap/core/8268               |    |
+| /dev/loop9     | 66M    | 66M    |    0 | 100% | /snap/gtk-common-themes/1506  |    |
+| /dev/loop10    | 8      | 8      |    0 | 100% | /snap/pulsemixer/283          |    |
+| /dev/loop11    | 132k   | 132k   |    0 | 100% | /snap/software-boutique/39    |    |
+| /dev/loop13    | 58M    | 58M    |    0 | 100% | /snap/core18/1754             |    |
+| /dev/mmcblk0p1 | 536M   | 6      | 530M |   2% | /boot/efi                     |    |
+| tmpfs          | 197M   | 3      | 193M |   2% | /run/user/1000                |    |
+| /dev/loop12    | 172M   | 172M   |    0 | 100% | /snap/spotify/41              |    |
+
+** Improvements
+
+Some TODOs for the future
+
+*** TODO Backup section
+*** TODO Auto-install scripts
 
 * This repo
 
@@ -56,7 +111,6 @@ If your Linux is brand new you may need to add your .rsa or create a new one for
 /*Obviously*: If you don't have emacs installed and configured you will not be able to execute here the code above, so you may want to visit next section./
 
 * Tools
-
 ** Main tool EMACS, *spacemacs* flavored
 
 The main tool (a part from git :) for taking the most of this document is EMACS, you want to have it installed.
@@ -95,11 +149,14 @@ uname -a
 #+RESULTS:
 : Linux Pavilion 5.3.0-53-generic #47~18.04.1-Ubuntu SMP Thu May 7 13:10:50 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
 
+Documentation on "signature" fails after spacemacs install:
+
  - https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
 
-* Terminal tune-up
+* Terminal
+** Powerline
 
-Powerline is a very usefull aplication when you use git, I recommend to install it. More info at 
+Powerline is a very usefull aplication when you use git, I recommend to install it. More info at: 
 
 #+begin_src sh
 
@@ -107,11 +164,120 @@ sudo apt-get install fonts-powerline powerline
 
 #+end_src
 
+After installation you should include into your .bashrc the initialization of the powerline, for doing this first check your installation path
+
+#+begin_src sh
+
+whereis powerline
+
+#+end_src
+#+RESULTS:
+: powerline: /usr/bin/powerline /usr/share/powerline /usr/share/man/man1/powerline.1.gz
+
+You should have a script to be included on your .bashrc: 
+
+#+begin_src sh
+
+ls -l /usr/share/powerline/bindings/bash/powerline.sh 
+
+#+end_src
+#+RESULTS:
+: -rw-r--r-- 1 root root 3042 may  8  2017 /usr/share/powerline/bindings/bash/powerline.sh
+
+If th above is working then you can addit executing the following code:
+
+#+begin_src sh
+
+cp ~/.bashrc ~/.bashrc.bk
+echo "\n\n# Powerline\n. /usr/share/powerline/bindings/bash/powerline.sh" >> ~/.bashrc
+echo "Done! :)"
+
+#+end_src
+
+#+RESULTS:
+: Done! :)
+
+** Some fun
+
+I love the pokemon say addon for terminal, is a litle bit of fun on your term:
+
+ - https://github.com/possatti/pokemonsay
+
+#+begin_src sh
+
+sudo apt-get install fortune cowsay
+
+#+end_src
+
+#+RESULTS:
+
+Some test that you have preinstalled what is needed:
+
+#+begin_src sh :results output
+
+fortune | cowsay
+
+#+end_src
+
+#+RESULTS:
+:  ______________________________________
+: / You have an unusual equipment for    \
+: \ success. Be sure to use it properly. /
+:  --------------------------------------
+:         \   ^__^
+:          \  (oo)\_______
+:             (__)\       )\/\
+:                 ||----w |
+:                 ||     ||
+
+#+begin_src sh :results output
+
+cd ~/
+git clone http://github.com/possatti/pokemonsay
+cd pokemonsay
+./install.sh
+
+#+end_src
+
+#+RESULTS:
+: The files were installed to '/home/ebh/.pokemonsay/'.
+: A 'pokemonsay' script was created in '/home/ebh/bin/'.
+: A uninstall script was created in '/home/ebh/.pokemonsay/'.
+: It may be necessary to logout and login back again in order to have the 'pokemonsay' available in your path.
+
+Now you want to add it to your .bashrc file to get some cool wellcome everytime you enter to your terminal.
+
+#+begin_src sh :results output
+
+cp ~/.bashrc ~/.bashrc.before.pokesay
+echo "\n\n# Pokemon say add-on\n fortune | ./bin/pokemonsay " >> ~/.bashrc
+diff ~/.bashrc ~/.bashrc.before.pokesay
+
+#+end_src
+
+#+RESULTS:
+
 * Productivity
+** Code snipets
 
-* Destkop tune-up
+This is very useful, you can use skeleton (code in lisp) or you can use a module called *yasnippet*, well documented here:
 
+ - https://jaketrent.com/post/code-snippets-spacemacs/ 
 
-* Tools tune-up
+For seleton you can use a configuration layer in spacemacs and code your own skeleton in elisp, I made this way some skeleton for IPM porpuses.
 
+** Music
+
+Spotify, it's a crap. I'm looking for replacement, but for now...
+
+#+begin_src sh
+
+snap install spotify
+
+#+end_src
+
+#+RESULTS:
+
+* Destkop
+* Tools
 
