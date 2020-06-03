@@ -189,13 +189,42 @@ If th above is working then you can addit executing the following code:
 #+begin_src sh
 
 cp ~/.bashrc ~/.bashrc.bk
-echo "\n\n# Powerline\n. /usr/share/powerline/bindings/bash/powerline.sh" >> ~/.bashrc
+echo "\n\n# Powerline" >> ~/.bashrc
+echo "\nexport PATH=$PATH:$HOME/Library/Python/2.7/bin" >> ~/.bashrc
+echo "\npowerline-daemon -q" >> ~/.bashrc
+echo "\nPOWERLINE_BASH_CONTINUATION=1" >>  ~/.bashrc
+echo "\nPOWERLINE_BASH_SELECT=1" >> ~/.bashrc
+echo "\n. /usr/share/powerline/bindings/bash/powerline.sh" >> ~/.bashrc
 echo "Done! :)"
 
 #+end_src
 
 #+RESULTS:
 : Done! :)
+
+Check your Python version BTW
+
+#+begin_src sh :results output
+
+python -V
+
+#+end_src
+
+#+RESULTS:
+
+Now you want to add to the powerline the git theme on Shell, this is very easy!
+I added in the repo my config file for this (very standard BTW).
+
+#+begin_src sh
+
+cp /usr/share/powerline/config_files/config.json ./config.json.bk
+cp ./powerline-conf/config.json /usr/share/powerline/config_files/
+
+#+end_src
+
+You will need to open a new terminal after changing the *config.json* file.
+
+More info: https://devpro.media/install-powerline-ubuntu/#edit-your-powerline-configuration
 
 ** Some fun
 
@@ -256,6 +285,98 @@ diff ~/.bashrc ~/.bashrc.before.pokesay
 #+end_src
 
 #+RESULTS:
+
+** Fonts
+
+Source Code Pro is the default font for Emacs, and also is a nice font. Here is how to install it.
+
+#+begin_src sh :results output
+
+git clone https://github.com/adobe-fonts/source-code-pro.git ./source-code-pro
+mkdir ~/.fonts
+cp ./source-code-pro/OTF/*.otf ~/.fonts/
+fc-cache -f -v
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+/usr/share/fonts: caching, new cache contents: 0 fonts, 7 dirs
+/usr/share/fonts/X11: caching, new cache contents: 0 fonts, 4 dirs
+/usr/share/fonts/X11/Type1: caching, new cache contents: 8 fonts, 0 dirs
+/usr/share/fonts/X11/encodings: caching, new cache contents: 0 fonts, 1 dirs
+/usr/share/fonts/X11/encodings/large: caching, new cache contents: 0 fonts, 0 dirs
+/usr/share/fonts/X11/misc: caching, new cache contents: 125 fonts, 0 dirs
+/usr/share/fonts/X11/util: caching, new cache contents: 0 fonts, 0 dirs
+/usr/share/fonts/cMap: caching, new cache contents: 0 fonts, 0 dirs
+/usr/share/fonts/cmap: caching, new cache contents: 0 fonts, 5 dirs
+/usr/share/fonts/cmap/adobe-cns1: caching, new cache contents: 0 fonts, 0 dirs
+/usr/share/fonts/cmap/adobe-gb1: caching, new cache contents: 0 fonts, 0 dirs
+/usr/share/fonts/cmap/adobe-japan1: caching, new cache contents: 0 fonts, 0 dirs
+/usr/share/fonts/cmap/adobe-japan2: caching, new cache contents: 0 fonts, 0 dirs
+/usr/share/fonts/cmap/adobe-korea1: caching, new cache contents: 0 fonts, 0 dirs
+/usr/share/fonts/opentype: caching, new cache contents: 1 fonts, 4 dirs
+/usr/share/fonts/opentype/malayalam: caching, new cache contents: 3 fonts, 0 dirs
+/usr/share/fonts/opentype/mathjax: caching, new cache contents: 24 fonts, 0 dirs
+/usr/share/fonts/opentype/noto: caching, new cache contents: 28 fonts, 0 dirs
+/usr/share/fonts/opentype/opendyslexic: caching, new cache contents: 9 fonts, 0 dirs
+/usr/share/fonts/truetype: caching, new cache contents: 0 fonts, 44 dirs
+/usr/share/fonts/truetype/Gargi: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/Gubbi: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/Nakula: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/Navilu: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/Sahadeva: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/Sarai: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/abyssinica: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/dejavu: caching, new cache contents: 22 fonts, 0 dirs
+/usr/share/fonts/truetype/droid: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/fonts-beng-extra: caching, new cache contents: 6 fonts, 0 dirs
+/usr/share/fonts/truetype/fonts-deva-extra: caching, new cache contents: 3 fonts, 0 dirs
+/usr/share/fonts/truetype/fonts-gujr-extra: caching, new cache contents: 5 fonts, 0 dirs
+/usr/share/fonts/truetype/fonts-guru-extra: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/fonts-kalapi: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/fonts-orya-extra: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/fonts-telu-extra: caching, new cache contents: 2 fonts, 0 dirs
+/usr/share/fonts/truetype/fonts-tiresias: caching, new cache contents: 22 fonts, 0 dirs
+/usr/share/fonts/truetype/freefont: caching, new cache contents: 12 fonts, 0 dirs
+/usr/share/fonts/truetype/kacst: caching, new cache contents: 15 fonts, 0 dirs
+/usr/share/fonts/truetype/kacst-one: caching, new cache contents: 2 fonts, 0 dirs
+/usr/share/fonts/truetype/lao: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/liberation: caching, new cache contents: 16 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-assamese: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-bengali: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-devanagari: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-gujarati: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-kannada: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-malayalam: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-oriya: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-punjabi: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-tamil: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-tamil-classical: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lohit-telugu: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/malayalam: caching, new cache contents: 11 fonts, 0 dirs
+/usr/share/fonts/truetype/noto: caching, new cache contents: 206 fonts, 0 dirs
+/usr/share/fonts/truetype/padauk: caching, new cache contents: 4 fonts, 0 dirs
+/usr/share/fonts/truetype/pagul: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/samyak: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/samyak-fonts: caching, new cache contents: 3 fonts, 0 dirs
+/usr/share/fonts/truetype/sinhala: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/tibetan-machine: caching, new cache contents: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/tlwg: caching, new cache contents: 58 fonts, 0 dirs
+/usr/share/fonts/truetype/ttf-khmeros-core: caching, new cache contents: 2 fonts, 0 dirs
+/usr/share/fonts/truetype/ubuntu: caching, new cache contents: 13 fonts, 0 dirs
+/usr/share/fonts/type1: caching, new cache contents: 0 fonts, 1 dirs
+/usr/share/fonts/type1/gsfonts: caching, new cache contents: 35 fonts, 0 dirs
+/usr/share/fonts/woff: caching, new cache contents: 0 fonts, 1 dirs
+/usr/share/fonts/woff/opendyslexic: caching, new cache contents: 4 fonts, 0 dirs
+/usr/local/share/fonts: caching, new cache contents: 0 fonts, 0 dirs
+/home/ebh/.local/share/fonts: skipping, no such directory
+/home/ebh/.fonts: caching, new cache contents: 14 fonts, 0 dirs
+/var/cache/fontconfig: not cleaning unwritable cache directory
+/home/ebh/.cache/fontconfig: cleaning cache directory
+/home/ebh/.fontconfig: not cleaning non-existent cache directory
+fc-cache: succeeded
+#+end_example
 
 * Productivity
 ** Code snipets
