@@ -1,10 +1,10 @@
 #+TITLE: Danioche linux set-up
 #+AUTHOR: @danioche
 #+DATE: <2020-05-25 lun>
-#+MODIFIED: <2020-06-01 lun>
+#+MODIFIED: <2020-06-07 dom>
 
 * About
-
+  
 This document should be used to help to configure *any* Ubuntu distro to working-distro with the most common set-up that I'm used to. 
 Main tools, corporate and productivity tools, and of course look&feel from a preconfigured repo.
 
@@ -59,7 +59,7 @@ df -H
 | /dev/loop9     | 66M    | 66M    |    0 | 100% | /snap/gtk-common-themes/1506  |    |
 | /dev/loop10    | 8      | 8      |    0 | 100% | /snap/pulsemixer/283          |    |
 | /dev/loop11    | 132k   | 132k   |    0 | 100% | /snap/software-boutique/39    |    |
-| /dev/loop13    | 58M    | 58M    |    0 | 100% | /snap/core18/1754             |    |
+| /dev/loop13    | #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js58M    | 58M    |    0 | 100% | /snap/core18/1754             |    |
 | /dev/mmcblk0p1 | 536M   | 6      | 530M |   2% | /boot/efi                     |    |
 | tmpfs          | 197M   | 3      | 193M |   2% | /run/user/1000                |    |
 | /dev/loop12    | 172M   | 172M   |    0 | 100% | /snap/spotify/41              |    |
@@ -153,9 +153,20 @@ Documentation on "signature" fails after spacemacs install:
 
  - https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
 
+*** I want my config back!
+
+Here is the most stable configuration on *.spacemacs* file.
+
+#+begin_src sh 
+
+cp ~/.spacemacs ~/.spacemacs.bk
+cp ./spacemacs/.spacemacs ~/.spacemacs
+
+#+end_src
+
 * Terminal
 ** Powerline
-
+ 
 Powerline is a very usefull aplication when you use git, I recommend to install it. More info at: 
 
 #+begin_src sh
@@ -225,6 +236,8 @@ cp ./powerline-conf/config.json /usr/share/powerline/config_files/
 You will need to open a new terminal after changing the *config.json* file.
 
 More info: https://devpro.media/install-powerline-ubuntu/#edit-your-powerline-configuration
+
+*** TODO To improve colors in powerline-git config to show changes on directory are pending
 
 ** Some fun
 
@@ -399,8 +412,21 @@ snap install spotify
 
 #+RESULTS:
 
-* Destkop
+** Presentations
 
+A part from LibreOffice suite you may want to have a powerfull tool for presentation. 
+This is for sure reveal.js, you can include it in your org configuration adding in your user layer */dotspacemacs-configuration-layers/*  inside */dotspacemacs/layers/* the following
+
+#+begin_src lisp
+     org
+     (org :variables
+          org-enable-github-support t
+          org-enable-reveal-js-support t)
+#+end_src 
+
+This configuration is included in the *.spacemacs* file. 
+
+* Destkop
 ** i3 tiling windows manager
 
 I'm just trying this, for me is good to have more focus on the work, avoiding disrruption and because of this I'm trying i3.
@@ -414,4 +440,14 @@ cp ./i3/.i3status.conf ~/
 #+end_src
 
 * Tools
+** GIMP
+The graphical editor!
+
+#+begin_src sh
+
+sudo apt-get install gimp
+
+#+end_src
+
+
 
