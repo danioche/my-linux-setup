@@ -1,0 +1,16 @@
+Config { font = "xft:SourceCodePro:size=10,FontAwesome:size=9"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ Run Network "wlp1s0" ["-L","0","-H","15000","--normal","green","--high","red","-S","True","--template"," <rx>|<tx>"] 10
+                    , Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red","-t"," <bar>"] 10
+                    , Run Memory ["-t"," <usedratio>%"] 10
+                    , Run Swap ["-t", "S <usedratio>%"] 10
+                    , Run Com "/home/danioche/.xmonad/get-Battery.sh" [] "myBatt" 600
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%multicpu% | %memory% %swap% | %wlp1s0% }{ <action=`gnome-weather`><fc=#ee9a00> %date%</fc></action> | %myBatt%"
+       }

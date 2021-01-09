@@ -1,15 +1,14 @@
 #+TITLE: Danioche linux set-up
 #+AUTHOR: @danioche
 #+DATE: <2020-05-25 lun>
-#+MODIFIED: <2020-06-07 dom>
+#+MODIFIED: <2021-01-08 vie>
 
 * About
   
-This document should be used to help to configure *any* Ubuntu distro to working-distro with the most common set-up that I'm used to. 
+This document should be used to help to configure *any* /Ubuntu/ distro to working-distro with the most common set-up that I'm used to. 
 Main tools, corporate and productivity tools, and of course look&feel from a preconfigured repo.
 
 Following literate documentation approach, inspiring post: http://cachestocaches.com/2018/6/org-literate-programming/ 
-
 
 #+ATTR_TEXTINFO: :author @danioche
 #+BEGIN_QUOTE
@@ -26,8 +25,9 @@ Bellow the latest commit mesage:
 git log -1 --pretty=%B
 
 #+end_src
+
 #+RESULTS:
-: Creation of first contents and check on code blocks
+: Small updates
 
 ** Check your space
 
@@ -41,28 +41,35 @@ df -H
 
 #+RESULTS:
 | S.ficheros     | Tamaño | Usados | Disp | Uso% | Montado                       | en |
-| udev           | 947M   | 0      | 947M |   0% | /dev                          |    |
-| tmpfs          | 197M   | 1      | 195M |   1% | /run                          |    |
-| /dev/mmcblk0p2 | 31G    | 12G    |  18G |  40% | /                             |    |
-| tmpfs          | 983M   | 123M   | 861M |  13% | /dev/shm                      |    |
-| tmpfs          | 5      | 4      |    5 |   1% | /run/lock                     |    |
-| tmpfs          | 983M   | 0      | 983M |   0% | /sys/fs/cgroup                |    |
-| /dev/loop1     | 132k   | 132k   |    0 | 100% | /snap/software-boutique/54    |    |
-| /dev/loop0     | 437M   | 437M   |    0 | 100% | /snap/libreoffice/180         |    |
-| /dev/loop2     | 169M   | 169M   |    0 | 100% | /snap/gnome-3-28-1804/116     |    |
-| /dev/loop3     | 437M   | 437M   |    0 | 100% | /snap/libreoffice/179         |    |
-| /dev/loop4     | 99M    | 99M    |    0 | 100% | /snap/core/9066               |    |
-| /dev/loop5     | 8      | 8      |    0 | 100% | /snap/pulsemixer/250          |    |
-| /dev/loop6     | 16M    | 16M    |    0 | 100% | /snap/ubuntu-mate-welcome/539 |    |
-| /dev/loop7     | 16M    | 16M    |    0 | 100% | /snap/ubuntu-mate-welcome/420 |    |
-| /dev/loop8     | 94M    | 94M    |    0 | 100% | /snap/core/8268               |    |
-| /dev/loop9     | 66M    | 66M    |    0 | 100% | /snap/gtk-common-themes/1506  |    |
-| /dev/loop10    | 8      | 8      |    0 | 100% | /snap/pulsemixer/283          |    |
-| /dev/loop11    | 132k   | 132k   |    0 | 100% | /snap/software-boutique/39    |    |
-| /dev/loop13    | #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js58M    | 58M    |    0 | 100% | /snap/core18/1754             |    |
-| /dev/mmcblk0p1 | 536M   | 6      | 530M |   2% | /boot/efi                     |    |
-| tmpfs          | 197M   | 3      | 193M |   2% | /run/user/1000                |    |
-| /dev/loop12    | 172M   | 172M   |    0 | 100% | /snap/spotify/41              |    |
+| udev           | 948M   | 0      | 948M |   0% | /dev                          |    |
+| tmpfs          | 197M   | 1,7M   | 196M |   1% | /run                          |    |
+| /dev/mmcblk0p2 | 31G    | 21G    | 7,7G |  74% | /                             |    |
+| tmpfs          | 984M   | 59M    | 925M |   6% | /dev/shm                      |    |
+| tmpfs          | 5,3M   | 4,1k   | 5,3M |   1% | /run/lock                     |    |
+| tmpfs          | 984M   | 0      | 984M |   0% | /sys/fs/cgroup                |    |
+| /dev/loop0     | 162M   | 162M   |    0 | 100% | /snap/emacs/966               |    |
+| /dev/loop1     | 103M   | 103M   |    0 | 100% | /snap/core/10444              |    |
+| /dev/loop3     | 8,4M   | 8,4M   |    0 | 100% | /snap/pulsemixer/250          |    |
+| /dev/loop4     | 132k   | 132k   |    0 | 100% | /snap/software-boutique/39    |    |
+| /dev/loop5     | 632M   | 632M   |    0 | 100% | /snap/libreoffice/198         |    |
+| /dev/loop6     | 170M   | 170M   |    0 | 100% | /snap/gnome-3-28-1804/128     |    |
+| /dev/loop7     | 59M    | 59M    |    0 | 100% | /snap/core18/1932             |    |
+| /dev/loop8     | 16M    | 16M    |    0 | 100% | /snap/ubuntu-mate-welcome/575 |    |
+| /dev/loop9     | 182M   | 182M   |    0 | 100% | /snap/spotify/43              |    |
+| /dev/loop10    | 66M    | 66M    |    0 | 100% | /snap/gtk-common-themes/1506  |    |
+| /dev/loop11    | 69M    | 69M    |    0 | 100% | /snap/gtk-common-themes/1514  |    |
+| /dev/loop13    | 171M   | 171M   |    0 | 100% | /snap/gnome-3-28-1804/145     |    |
+| /dev/loop14    | 8,4M   | 8,4M   |    0 | 100% | /snap/pulsemixer/283          |    |
+| /dev/loop16    | 65M    | 65M    |    0 | 100% | /snap/core20/875              |    |
+| /dev/loop18    | 132k   | 132k   |    0 | 100% | /snap/software-boutique/54    |    |
+| /dev/loop17    | 16M    | 16M    |    0 | 100% | /snap/ubuntu-mate-welcome/559 |    |
+| /dev/loop19    | 178M   | 178M   |    0 | 100% | /snap/spotify/42              |    |
+| /dev/mmcblk0p1 | 536M   | 6,5M   | 530M |   2% | /boot/efi                     |    |
+| tmpfs          | 197M   | 29k    | 197M |   1% | /run/user/1000                |    |
+| /dev/loop20    | 65M    | 65M    |    0 | 100% | /snap/core20/904              |    |
+| /dev/loop21    | 103M   | 103M   |    0 | 100% | /snap/core/10577              |    |
+| /dev/loop22    | 59M    | 59M    |    0 | 100% | /snap/core18/1944             |    |
+| /dev/loop2     | 632M   | 632M   |    0 | 100% | /snap/libreoffice/200         |    |
 
 ** Improvements
 
@@ -71,7 +78,7 @@ Some TODOs for the future
 *** TODO Backup section
 *** TODO Auto-install scripts
 
-* This repo
+* This project
 
 The structure that I want is a private repository that will have all the scripts needed to config the new distro.
 Obviously what is inside is this main ORG file, that is a literate document; so once you installed Emacs and Spacemacs you will be able to execute the configurations as you wish.
@@ -89,6 +96,9 @@ git version
 If Ctr+C Ctr+C does not works showing you the following message: "Evaluation of this sh code block is disabled" then you may have a problem on configuration here is a trick:
 
  - https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
+
+This configuration project also is assuming that the target linux installation uses 'apt' package manager. Because I also have som systema on Fedora that uses 'dnf' package manager you may also find some code to install most used packages.
+
 
 ** Installing git
 
@@ -109,7 +119,6 @@ If your Linux is brand new you may need to add your .rsa or create a new one for
    - https://help.github.com/articles/generating-a-gpg-key/
 
 /*Obviously*: If you don't have emacs installed and configured you will not be able to execute here the code above, so you may want to visit next section./
-
 * Tools
 ** Main tool EMACS, *spacemacs* flavored
 
@@ -164,14 +173,43 @@ cp ./spacemacs/.spacemacs ~/.spacemacs
 
 #+end_src
 
+** GIMP
+
+The graphical editor!
+
+#+begin_src sh
+
+sudo apt-get install gimp
+
+#+end_src
+
+** DOOM EMACS
+
+I'm trying new things, after getting bored of watching DOOM Emacs videos, I just tought... let's try it!
+
+Starting at: <2020-12-18 vie> ... we will see...
+
+#+begin_src sh
+
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+
+#+end_src
+
 * Terminal
 ** Powerline
- 
 Powerline is a very usefull aplication when you use git, I recommend to install it. More info at: 
 
 #+begin_src sh
 
 sudo apt-get install fonts-powerline powerline
+
+#+end_src
+
+For DNF package manager
+#+begin_src sh
+
+sudo dnf install powerline
 
 #+end_src
 
@@ -189,23 +227,23 @@ You should have a script to be included on your .bashrc:
 
 #+begin_src sh
 
-ls -l /usr/share/powerline/bindings/bash/powerline.sh 
+ls -l /usr/share/powerline/bash/powerline.sh
 
 #+end_src
 #+RESULTS:
-: -rw-r--r-- 1 root root 3042 may  8  2017 /usr/share/powerline/bindings/bash/powerline.sh
+: -rw-r--r--. 1 root root 4183 jul 29 17:13 /usr/share/powerline/bash/powerline.sh
 
 If th above is working then you can addit executing the following code:
 
 #+begin_src sh
 
 cp ~/.bashrc ~/.bashrc.bk
-echo "\n\n# Powerline" >> ~/.bashrc
-echo "\nexport PATH=$PATH:$HOME/Library/Python/2.7/bin" >> ~/.bashrc
-echo "\npowerline-daemon -q" >> ~/.bashrc
-echo "\nPOWERLINE_BASH_CONTINUATION=1" >>  ~/.bashrc
-echo "\nPOWERLINE_BASH_SELECT=1" >> ~/.bashrc
-echo "\n. /usr/share/powerline/bindings/bash/powerline.sh" >> ~/.bashrc
+echo "# Powerline" >> ~/.bashrc
+echo "export PATH=$PATH:$HOME/Library/Python/2.7/bin" >> ~/.bashrc
+echo "powerline-daemon -q" >> ~/.bashrc
+echo "POWERLINE_BASH_CONTINUATION=1" >>  ~/.bashrc
+echo "POWERLINE_BASH_SELECT=1" >> ~/.bashrc
+echo ". /usr/share/powerline/bash/powerline.sh" >> ~/.bashrc
 echo "Done! :)"
 
 #+end_src
@@ -251,11 +289,20 @@ sudo apt-get install fortune cowsay
 
 #+end_src
 
-#+RESULTS:
+For Fedora, there is an slight difference
+
+#+begin_src sh
+
+sudo dnf install fortune-mod
+sudo dnf install cowsay
+
+#+end_src
+
+,#+RESULTS:
 
 Some test that you have preinstalled what is needed:
 
-#+begin_src sh :results output
+,#+begin_src sh :results output
 
 fortune | cowsay
 
@@ -282,9 +329,9 @@ cd pokemonsay
 #+end_src
 
 #+RESULTS:
-: The files were installed to '/home/ebh/.pokemonsay/'.
-: A 'pokemonsay' script was created in '/home/ebh/bin/'.
-: A uninstall script was created in '/home/ebh/.pokemonsay/'.
+: The files were installed to '/home/danioche/.pokemonsay/'.
+: A 'pokemonsay' script was created in '/home/danioche/bin/'.
+: A uninstall script was created in '/home/danioche/.pokemonsay/'.
 : It may be necessary to logout and login back again in order to have the 'pokemonsay' available in your path.
 
 Now you want to add it to your .bashrc file to get some cool wellcome everytime you enter to your terminal.
@@ -292,7 +339,8 @@ Now you want to add it to your .bashrc file to get some cool wellcome everytime 
 #+begin_src sh :results output
 
 cp ~/.bashrc ~/.bashrc.before.pokesay
-echo "\n\n# Pokemon say add-on\n fortune | ./bin/pokemonsay " >> ~/.bashrc
+echo "# Pokemon say add-on"
+echo "fortune | ~/bin/pokemonsay " >> ~/.bashrc
 diff ~/.bashrc ~/.bashrc.before.pokesay
 
 #+end_src
@@ -402,6 +450,8 @@ For seleton you can use a configuration layer in spacemacs and code your own ske
 
 ** Music
 
+*** Lazy Option: Spotify
+
 Spotify, it's a crap. I'm looking for replacement, but for now...
 
 #+begin_src sh
@@ -413,6 +463,8 @@ snap install spotify
 #+RESULTS:
 
 ** Presentations
+
+*** reveal-js for Spaceemacs configuration
 
 A part from LibreOffice suite you may want to have a powerfull tool for presentation. 
 This is for sure reveal.js, you can include it in your org configuration adding in your user layer */dotspacemacs-configuration-layers/*  inside */dotspacemacs/layers/* the following
@@ -439,15 +491,82 @@ cp ./i3/.i3status.conf ~/
 
 #+end_src
 
-* Tools
-** GIMP
-The graphical editor!
+Documentation can be found here: https://i3wm.org/docs/userguide.html#_default_keybindings
+
+#+begin_example sh
+
+ln -s /sys/class/power_supply/axp288_fuel_gauge/ BAT1
+
+#+end_example
+
+** xmonad tiling windows manager
+
+I've tried Xmonad and has that minimilistic touch that I love, so this is an option to take into consideration, heres is how to install.
+
+The following is for install For Fedora:
 
 #+begin_src sh
 
-sudo apt-get install gimp
+ sudo dnf install xmonad
 
 #+end_src
 
+I use xmobar with xmonad, so let's install it:
 
+#+begin_src sh
 
+ sudo dnf install xmobar
+
+#+end_src
+
+For easy the configuration you have .xmonad folder here and .xmobarrc
+
+#+begin_src sh :results output
+
+ls -l ./.xmonad
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+total 5380
+-rwxrwxrwx. 1 danioche danioche     793 ene  1 19:15 get-Battery.sh
+-rwxrwxrwx. 1 danioche danioche     267 dic 26 21:07 get-Volume.sh
+-rwxrwxrwx. 1 danioche danioche    1245 ene  4 19:20 get-Weather.sh
+-rwxrwxrwx. 1 danioche danioche   30255 dic 27 20:45 icons.all
+-rwxrwxrwx. 1 danioche danioche     318 ene  5 22:08 set-Brightness.sh
+-rwxrwxrwx. 1 danioche danioche     345 ene  6 18:59 weather-status.info
+-rwxrwxrwx. 1 danioche danioche     560 ene  9 11:49 xmonad.errors
+-rwxrwxrwx. 1 danioche danioche    3834 ene  8 19:38 xmonad.hi
+-rwxrwxrwx. 1 danioche danioche   11791 ene  8 19:33 xmonad.hs
+-rw-r--r--. 1 danioche danioche   76568 ene  9 11:49 xmonad.o
+-rwxr-xr-x. 1 danioche danioche 5357008 ene  9 11:49 xmonad-x86_64-linux
+#+end_example
+
+Here is the configuration for xmobar
+
+#+begin_src sh :results output
+
+cat ./.xmobarrc
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Config { font = "xft:SourceCodePro:size=10,FontAwesome:size=9"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ Run Network "wlp1s0" ["-L","0","-H","15000","--normal","green","--high","red","-S","True","--template"," <rx>|<tx>"] 10
+                    , Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red","-t"," <bar>"] 10
+                    , Run Memory ["-t"," <usedratio>%"] 10
+                    , Run Swap ["-t", "S <usedratio>%"] 10
+                    , Run Com "/home/danioche/.xmonad/get-Battery.sh" [] "myBatt" 600
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%multicpu% | %memory% %swap% | %wlp1s0% }{ <action=`gnome-weather`><fc=#ee9a00> %date%</fc></action> | %myBatt%"
+       }
+#+end_example
