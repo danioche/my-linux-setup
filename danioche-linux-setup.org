@@ -1,12 +1,14 @@
-#+TITLE: Danioche linux set-up
+#+TITLE: Danioche linux set-up and customization
+#+OPTIONS: toc:nil num:3 H:4 ^:nil pri:t
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="org.css"/>
 #+AUTHOR: @danioche
 #+DATE: <2020-05-25 lun>
-#+MODIFIED: <2021-01-08 vie>
+#+MODIFIED: <2021-01-13 mié>
 
 * About
   
-This document should be used to help to configure *any* /Ubuntu/ distro to working-distro with the most common set-up that I'm used to. 
-Main tools, corporate and productivity tools, and of course look&feel from a preconfigured repo.
+This document should be used to help to configure *any* /Ubuntu/ (and recently /Fedora/) distro to working-distro with the most common set-up that I'm used to.
+Main tools, corporate and productivity tools; and of course with the look&feel from a preconfigured repo.
 
 Following literate documentation approach, inspiring post: http://cachestocaches.com/2018/6/org-literate-programming/ 
 
@@ -27,49 +29,21 @@ git log -1 --pretty=%B
 #+end_src
 
 #+RESULTS:
-: Small updates
+: Fedora config Xmonad and Xmobar added
 
 ** Check your space
 
 You may want to check your disk space befor continue on this customization:
 
-#+begin_src sh
+#+begin_src sh :results output
 
-df -H
+df -H /
 
 #+end_src
 
 #+RESULTS:
-| S.ficheros     | Tamaño | Usados | Disp | Uso% | Montado                       | en |
-| udev           | 948M   | 0      | 948M |   0% | /dev                          |    |
-| tmpfs          | 197M   | 1,7M   | 196M |   1% | /run                          |    |
-| /dev/mmcblk0p2 | 31G    | 21G    | 7,7G |  74% | /                             |    |
-| tmpfs          | 984M   | 59M    | 925M |   6% | /dev/shm                      |    |
-| tmpfs          | 5,3M   | 4,1k   | 5,3M |   1% | /run/lock                     |    |
-| tmpfs          | 984M   | 0      | 984M |   0% | /sys/fs/cgroup                |    |
-| /dev/loop0     | 162M   | 162M   |    0 | 100% | /snap/emacs/966               |    |
-| /dev/loop1     | 103M   | 103M   |    0 | 100% | /snap/core/10444              |    |
-| /dev/loop3     | 8,4M   | 8,4M   |    0 | 100% | /snap/pulsemixer/250          |    |
-| /dev/loop4     | 132k   | 132k   |    0 | 100% | /snap/software-boutique/39    |    |
-| /dev/loop5     | 632M   | 632M   |    0 | 100% | /snap/libreoffice/198         |    |
-| /dev/loop6     | 170M   | 170M   |    0 | 100% | /snap/gnome-3-28-1804/128     |    |
-| /dev/loop7     | 59M    | 59M    |    0 | 100% | /snap/core18/1932             |    |
-| /dev/loop8     | 16M    | 16M    |    0 | 100% | /snap/ubuntu-mate-welcome/575 |    |
-| /dev/loop9     | 182M   | 182M   |    0 | 100% | /snap/spotify/43              |    |
-| /dev/loop10    | 66M    | 66M    |    0 | 100% | /snap/gtk-common-themes/1506  |    |
-| /dev/loop11    | 69M    | 69M    |    0 | 100% | /snap/gtk-common-themes/1514  |    |
-| /dev/loop13    | 171M   | 171M   |    0 | 100% | /snap/gnome-3-28-1804/145     |    |
-| /dev/loop14    | 8,4M   | 8,4M   |    0 | 100% | /snap/pulsemixer/283          |    |
-| /dev/loop16    | 65M    | 65M    |    0 | 100% | /snap/core20/875              |    |
-| /dev/loop18    | 132k   | 132k   |    0 | 100% | /snap/software-boutique/54    |    |
-| /dev/loop17    | 16M    | 16M    |    0 | 100% | /snap/ubuntu-mate-welcome/559 |    |
-| /dev/loop19    | 178M   | 178M   |    0 | 100% | /snap/spotify/42              |    |
-| /dev/mmcblk0p1 | 536M   | 6,5M   | 530M |   2% | /boot/efi                     |    |
-| tmpfs          | 197M   | 29k    | 197M |   1% | /run/user/1000                |    |
-| /dev/loop20    | 65M    | 65M    |    0 | 100% | /snap/core20/904              |    |
-| /dev/loop21    | 103M   | 103M   |    0 | 100% | /snap/core/10577              |    |
-| /dev/loop22    | 59M    | 59M    |    0 | 100% | /snap/core18/1944             |    |
-| /dev/loop2     | 632M   | 632M   |    0 | 100% | /snap/libreoffice/200         |    |
+: S.ficheros     Tamaño Usados  Disp Uso% Montado en
+: /dev/mmcblk0p3    30G    16G   14G  54% /
 
 ** Improvements
 
@@ -172,6 +146,20 @@ cp ~/.spacemacs ~/.spacemacs.bk
 cp ./spacemacs/.spacemacs ~/.spacemacs
 
 #+end_src
+
+Configuration for transparency in Emacs:
+
+#+begin_src sh
+
+;; danioche - transparency
+;; --------
+;;(set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
+;;(set-frame-parameter (selected-frame) 'alpha <both>)
+ (set-frame-parameter (selected-frame) 'alpha '(95 . 80))
+ (add-to-list 'default-frame-alist '(alpha . (95 . 80)))
+
+#+end_src
+
 
 ** GIMP
 
@@ -298,11 +286,11 @@ sudo dnf install cowsay
 
 #+end_src
 
-,#+RESULTS:
+#+RESULTS:
 
 Some test that you have preinstalled what is needed:
 
-,#+begin_src sh :results output
+#+begin_src sh :results output
 
 fortune | cowsay
 
@@ -523,12 +511,20 @@ For easy the configuration you have .xmonad folder here and .xmobarrc
 
 #+begin_src sh :results output
 
+printf "Xmobar config file:\n\n"
+ls -l .xmobarrc
+printf "Xmonad config and other scripts used by Xmobar:\n\n"
 ls -l ./.xmonad
 
 #+end_src
 
 #+RESULTS:
 #+begin_example
+Xmobar config file:
+
+-rw-r--r--. 1 danioche danioche 1863 ene 13 21:14 .xmobarrc
+Xmonad config and other scripts used by Xmobar:
+
 total 5380
 -rwxrwxrwx. 1 danioche danioche     793 ene  1 19:15 get-Battery.sh
 -rwxrwxrwx. 1 danioche danioche     267 dic 26 21:07 get-Volume.sh
@@ -538,7 +534,7 @@ total 5380
 -rwxrwxrwx. 1 danioche danioche     345 ene  6 18:59 weather-status.info
 -rwxrwxrwx. 1 danioche danioche     560 ene  9 11:49 xmonad.errors
 -rwxrwxrwx. 1 danioche danioche    3834 ene  8 19:38 xmonad.hi
--rwxrwxrwx. 1 danioche danioche   11791 ene  8 19:33 xmonad.hs
+-rwxrwxrwx. 1 danioche danioche   12074 ene 13 21:14 xmonad.hs
 -rw-r--r--. 1 danioche danioche   76568 ene  9 11:49 xmonad.o
 -rwxr-xr-x. 1 danioche danioche 5357008 ene  9 11:49 xmonad-x86_64-linux
 #+end_example

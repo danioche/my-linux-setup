@@ -15,7 +15,8 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 -- XMobar dock
 import XMonad.Hooks.ManageDocks
-
+-- Minimize for apps like
+import XMonad.Actions.Minimize
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -111,6 +112,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Move focus to the master window
     , ((modm,               xK_m     ), windows W.focusMaster  )
 
+    -- Minimize Window
+    , ((modm,               xK_f     ), withFocused minimizeWindow)
+    , ((modm .|. shiftMask, xK_f     ), withLastMinimized maximizeWindowAndFocus)
+
+
     -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
 
@@ -146,6 +152,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+
+    -- Put status bar in second monitor
+    , ((modm              , xK_b     ), spawn "xmobar -x 1 -A 165 ~/.xmobarrc")
+
     ]
     ++
 
@@ -239,9 +249,9 @@ myLayout = avoidStruts ( tiled ||| Mirror tiled ||| Full )
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "rhythmbox"      --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
-
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -297,11 +307,11 @@ myStartupHook = do
 -- danioche - Modified for desktop personalisation
 main = do
 --   xmproc <- spawnPipe "i3status | xmobar -o -t \"%StdinReader%\" -c \"[Run StdinReader]\" --font=\"xft:Source Code Pro:size=12\" "
-   xmproc <- spawnPipe "xmobar -x 0 -o  ~/.xmobarrc"
+   xmproc <- spawnPipe "xmobar -x 0 -A 165 -o ~/.xmobarrc"
    xmonad $ docks defaults
 
 
--- A structu2re containing your configuration settings, overriding
+-- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
 -- use the defaults defined in xmonad/XMonad/Config.hs
 --
