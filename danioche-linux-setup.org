@@ -1,13 +1,15 @@
-#+TITLE: Danioche linux set-up and customization
-#+OPTIONS: toc:nil num:3 H:4 ^:nil pri:t
+#+TITLE: Danioche Linux set-up and customization
+#+OPTIONS: toc:2 num:3 H:4 ^:nil pri:t
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="org.css"/>
+#+OPTIONS: html-style:nil
 #+AUTHOR: @danioche
 #+DATE: <2020-05-25 lun>
 #+MODIFIED: <2021-01-13 mié>
 
 * About
   
-This document should be used to help to configure *any* /Ubuntu/ (and recently /Fedora/) distro to working-distro with the most common set-up that I'm used to.
+This document should be used to help to configure *mostly any* /Ubuntu/ (and recently /Fedora/) distro to working-distro with the most common set-up that I'm used to.
+
 Main tools, corporate and productivity tools; and of course with the look&feel from a preconfigured repo.
 
 Following literate documentation approach, inspiring post: http://cachestocaches.com/2018/6/org-literate-programming/ 
@@ -15,25 +17,29 @@ Following literate documentation approach, inspiring post: http://cachestocaches
 #+ATTR_TEXTINFO: :author @danioche
 #+BEGIN_QUOTE
 
-All the shell code here comes without any warranty, execute it (or not) at your own risk.
-I assume that you understand the code, you can modify it, as always, at your own risk.
+All the shell code here comes without any warranty, AT ALL, execute it (or not) at your own risk.
+I assume that you understand the code, you can modif, use it, post it, or whatever, at your own risk :)
 
 #+END_QUOTE
 
+Also, document format for exporting in HTML is from [[https://gongzhitaao.org/orgcss/][gongzhitaao]], clean and nice CSS, very useful. Thanks!
+
 Bellow the latest commit mesage:
 
-#+begin_src sh
+#+begin_src sh :results output
 
 git log -1 --pretty=%B
 
 #+end_src
 
 #+RESULTS:
-: Fedora config Xmonad and Xmobar added
+: Added modm+b to start a second status bar on 2nd monitor
+: New css for exporting documentation
+:
 
 ** Check your space
 
-You may want to check your disk space befor continue on this customization:
+You may want to check your disk space befor continue on this customization. Some software (if you decide) will be installed in your system so if you are runing with limmited amout on space this could be useful:
 
 #+begin_src sh :results output
 
@@ -45,19 +51,31 @@ df -H /
 : S.ficheros     Tamaño Usados  Disp Uso% Montado en
 : /dev/mmcblk0p3    30G    16G   14G  54% /
 
+I try to avoid bloated linux distros, but the most recent distros comes with at least ~ 15Gb, and, really, is quite a lot for a linux system.
+I love minimal installations ( I still remember the installations of Slackware that I made in my beloved Compaq Armada with 1Gb W95 + Slackware, nice uh? ).
+
+
 ** Improvements
 
-Some TODOs for the future
+In this section I will record some taks and TODOs for future versions
+
+*** DONE <2021-01-17 dom> Export configuration
+
+Configuration using gongzhintaao CSS that is enough for now, maybe we could add future improvements.
 
 *** TODO Backup section
 *** TODO Auto-install scripts
 
+
 * This project
 
-The structure that I want is a private repository that will have all the scripts needed to config the new distro.
+The structure that I want is a private repository (If you are reading this is because you colaborate or I decided that the project is mature enough to make it public) that will have all the scripts needed to config the new distro.
+
+Ansible and playbooks are also options to take into account but, because the distro is configured for using as "regular-manager/coder-user" I don't need any specific "server-side" conditions. So I decided more the literate-programming approach to fullfil my customization requirements.
+
 Obviously what is inside is this main ORG file, that is a literate document; so once you installed Emacs and Spacemacs you will be able to execute the configurations as you wish.
 
-Summarizing, the step-0 is to have git.
+Summarizing, the step-0 is to have git (if you are reading this document sequentialy you may have needed before).
 
 #+begin_src sh
 
@@ -65,7 +83,7 @@ git version
 
 #+end_src
 #+RESULTS:
-: git version 2.17.1
+: git version 2.28.0
 
 If Ctr+C Ctr+C does not works showing you the following message: "Evaluation of this sh code block is disabled" then you may have a problem on configuration here is a trick:
 
@@ -73,10 +91,20 @@ If Ctr+C Ctr+C does not works showing you the following message: "Evaluation of 
 
 This configuration project also is assuming that the target linux installation uses 'apt' package manager. Because I also have som systema on Fedora that uses 'dnf' package manager you may also find some code to install most used packages.
 
+#+BEGIN_QUOTE
+
+This kind of errors may happen if you play too much with Emacs or Org package, I came up with this problem in Spacemacs. But in DOOM Emacs worked as expected from the first time. Anyway, if you have further problems let me know!
+
+#+END_QUOTE
 
 ** Installing git
 
+Welcome to 2021, it's time to do it! :)
+
 The following command may be not fully working from this documentation, but you can copy-paste to install it.
+
+
+
 
 #+begin_src sh
 
