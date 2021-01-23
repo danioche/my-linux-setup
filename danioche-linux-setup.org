@@ -4,7 +4,6 @@
 #+OPTIONS: html-style:nil
 #+AUTHOR: @danioche
 #+DATE: <2020-05-25 lun>
-#+MODIFIED: <2021-01-13 mié>
 
 * About
   
@@ -187,6 +186,22 @@ Configuration for transparency in Emacs:
  (add-to-list 'default-frame-alist '(alpha . (95 . 80)))
 
 #+end_src
+
+** System
+
+This section is in which i recommend some system tools if not installed.
+
+*** HTop
+
+Mostly (AFAIK) top should be included, but htop is more powerfull and fancy from terminal
+
+#+begin_src sh :results output
+
+sudo dnf install htop
+
+#+end_src
+
+#+RESULTS:
 
 
 ** GIMP
