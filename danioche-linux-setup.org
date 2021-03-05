@@ -5,6 +5,7 @@
 #+AUTHOR: @danioche
 #+DATE: <2020-05-25 lun>
 
+
 * About
   
 This document should be used to help to configure *mostly any* /Ubuntu/ (and recently /Fedora/) distro to working-distro with the most common set-up that I'm used to.
@@ -52,7 +53,6 @@ df -H /
 
 I try to avoid bloated linux distros, but the most recent distros comes with at least ~ 15Gb, and, really, is quite a lot for a linux system.
 I love minimal installations ( I still remember the installations of Slackware that I made in my beloved Compaq Armada with 1Gb W95 + Slackware, nice uh? ).
-
 
 ** Improvements
 
@@ -153,7 +153,7 @@ uname -a
 
 #+end_src
 #+RESULTS:
-: Linux Pavilion 5.3.0-53-generic #47~18.04.1-Ubuntu SMP Thu May 7 13:10:50 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+: Linux localhost.localdomain 5.10.9-201.fc33.x86_64 #1 SMP Wed Jan 20 16:56:23 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 
 Documentation on "signature" fails after spacemacs install:
 
@@ -183,8 +183,6 @@ Configuration for transparency in Emacs:
  (add-to-list 'default-frame-alist '(alpha . (95 . 80)))
 
 #+end_src
-
-#+RESULTS:
 
 ***** TODO Move spacemacs configuration to dotfile folder
 
@@ -509,6 +507,25 @@ This is for sure reveal.js, you can include it in your org configuration adding 
 This configuration is included in the *.spacemacs* file. 
 
 * Destkop
+
+** GDM - Fedora login screen background
+
+This should be easy but isn't... something quite simple like changing the user's login background it is a little big triky.
+
+For being able to modify the Gnome Desktop Manager login screen background you will need to download an specific application.
+
+Here is what I found in https://copr.fedorainfracloud.org/coprs/zirix/gdm-wallpaper/
+
+#+begin_src sh
+
+dnf copr enable zirix/gdm-wallpaper
+dnf install gdm-wallpaper
+set-gdm-wallpaper /path/to/image.png
+
+#+end_src
+
+And works! I disabled the repository added just in case once is installed.
+
 ** i3 tiling windows manager
 
 I'm just trying this, for me is good to have more focus on the work, avoiding disrruption and because of this I'm trying i3.
