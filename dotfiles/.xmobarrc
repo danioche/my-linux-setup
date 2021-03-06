@@ -20,7 +20,7 @@ Config { font = "xft:DejaVu Sans Mono:size=10,Font Awesome:size=9"
                           , ("partly cloudy", "⛅")
                           , ("mostly cloudy", "🌧")
                           , ("considerable cloudiness", "⛈")]
-                          ["-t", "<fc=#04d9ff>W</fc> <fn=2><skyConditionS></fn> <tempC>º  <rh>%   <windCardinal>(<windAzimuth>º)  <windKnots>"
+                          ["-t", "<fc=#04d9ff>W</fc> <tempC>º  <rh>%   <windCardinal>(<windAzimuth>º)  <windKnots>"
                           , "-L","10", "-H", "25", "--normal", "black"
                           , "--high", "lightgoldenrod4", "--low", "darkseagreen4"] 18000
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
