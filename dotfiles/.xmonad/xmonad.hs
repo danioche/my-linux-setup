@@ -299,7 +299,7 @@ myLogHook = return ()
 -- It will add initialization of EWMH support to your custom startup
 -- hook by combining it with ewmhDesktopsStartup.
 --
--- danioche - Modified for desktop personalisation
+-- danioche - Modified for desktop personalisation forcing the call to Xsession and adding feh random background - !check for the Directory
 myStartupHook = do
     spawnOnce "~/.xsession &"
 

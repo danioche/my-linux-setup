@@ -548,20 +548,23 @@ This configuration is included in the *.spacemacs* file.
 
 * Blogging
 
-In this section I will document the use of Hugo and how I adopted org-mode with Hugo static web generation.
+  I adopted org-mode with Hugo static web generation.
 
-Firts of all we need to install Hugo, in Fedora
+  Firts of all we need to install Hugo, in Fedora
 
-#+begin_src sh
+  #+begin_src sh
 
-sudo dnf install hugo
+  sudo dnf install hugo
 
-#+end_src
+  #+end_src
 
-Anatole Template
-https://themes.gohugo.io/anatole/
+  I used anatole Template
+  https://themes.gohugo.io/anatole/
 
-Adding the template to the current project
+  And also I documented briefly the process on the blog post:
+
+  
+
 
 * Destkop
 
