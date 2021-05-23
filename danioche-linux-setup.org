@@ -7,43 +7,71 @@
 
 * About
   
-This document should be used to help to configure *mostly any* /Ubuntu/ (and recently /Fedora/) distro to working-distro with the most common set-up that I'm used to.
+  This document it's aimed to help to configure *mostly any* /Ubuntu/
+  (and recently /Fedora/) distro to working-distro with the most
+  common set-up that I'm used to.  The distro-dependency is because
+  this includes some package-managers-dependency, I include on the
+  codes some scripting in shell for invoquing the installation.  Main
+  tools, corporate and productivity tools; and of course with the
+  look&feel from a preconfigured repo.
 
-Main tools, corporate and productivity tools; and of course with the look&feel from a preconfigured repo.
+  Following literate documentation approach, inspiring post:
+  http://cachestocaches.com/2018/6/org-literate-programming/
 
-Following literate documentation approach, inspiring post: http://cachestocaches.com/2018/6/org-literate-programming/ 
+  #+ATTR_TEXTINFO: :author @danioche
+  #+BEGIN_QUOTE
+  
+    All the shell code here comes without any warranty, AT ALL,
+    execute it (or not) at your own risk.  I assume that you
+    understand the code, you can modif, use it, post it, or whatever,
+    at your own risk :)
 
-#+ATTR_TEXTINFO: :author @danioche
-#+BEGIN_QUOTE
+  #+END_QUOTE
 
-All the shell code here comes without any warranty, AT ALL, execute it (or not) at your own risk.
-I assume that you understand the code, you can modif, use it, post it, or whatever, at your own risk :)
+  Also, document format for exporting in HTML is from [[https://gongzhitaao.org/orgcss/][gongzhitaao]],
+  clean and nice CSS, very useful. Thanks!
 
-#+END_QUOTE
+  Bellow the latest commit mesage:
 
-Also, document format for exporting in HTML is from [[https://gongzhitaao.org/orgcss/][gongzhitaao]], clean and nice CSS, very useful. Thanks!
+  #+begin_src sh :results output
 
-Bellow the latest commit mesage:
+    echo "Showing last 5 changes on the project:"
+    echo "-----------------------------------------"
+    git log -5 --pretty=%B --date=relative
 
-#+begin_src sh :results output
+  #+end_src
 
-git log -1 --pretty=%B
+  #+RESULTS:
+  #+begin_example
+  Showing last 5 changes
+  Added .emacs config to dotfiles
 
-#+end_src
+  Added Weather info LEAL in xmonad xmobar
 
-#+RESULTS:
-: Added Weather info LEAL in xmonad xmobar
-: 
+  Added login background on gdm Fedora
+
+  Few Improvements:
+  - Better organization of dotfile folder
+  - README.md added
+  - Wallpapers updated with latests used
+
+  Added brightness adjustment with super+Y and super+mod+Y
+
+  #+end_example
+
 
 ** Check your space
 
-You may want to check your disk space befor continue on this customization. Some software (if you decide) will be installed in your system so if you are runing with limmited amout on space this could be useful:
+   You may want to check your disk space befor continue on this
+   customization. Some software (if you decide) will be installed in
+   your system so if you are runing with limmited amout on space this
+   could be useful:
 
-#+begin_src sh :results output
+   #+begin_src sh :results output
 
-df -H /
+     df -H /
 
-#+end_src
+   #+end_src
 
 #+RESULTS:
 : S.ficheros     Tamaño Usados  Disp Uso% Montado en
@@ -64,31 +92,31 @@ Configuration using gongzhintaao CSS that is enough for now, maybe we could add 
 *** TODO Auto-install scripts
 * This project
 
-The structure that I want is a private repository (If you are reading this is because you colaborate or I decided that the project is mature enough to make it public) that will have all the scripts needed to config the new distro.
+  The structure that I want is a private repository (If you are reading this is because you colaborate or I decided that the project is mature enough to make it public) that will have all the scripts needed to config the new distro.
 
-Ansible and playbooks are also options to take into account but, because the distro is configured for using as "regular-manager/coder-user" I don't need any specific "server-side" conditions. So I decided more the literate-programming approach to fullfil my customization requirements.
+  Ansible and playbooks are also options to take into account but, because the distro is configured for using as "regular-manager/coder-user" I don't need any specific "server-side" conditions. So I decided more the literate-programming approach to fullfil my customization requirements.
 
-Obviously what is inside is this main ORG file, that is a literate document; so once you installed Emacs and Spacemacs you will be able to execute the configurations as you wish.
+  Obviously what is inside is this main ORG file, that is a literate document; so once you installed Emacs and Spacemacs you will be able to execute the configurations as you wish.
 
-Summarizing, the step-0 is to have git (if you are reading this document sequentialy you may have needed before).
+  Summarizing, the step-0 is to have git (if you are reading this document sequentialy you may have needed before).
 
-#+begin_src sh
+  #+begin_src sh
 
-git version
+    git version
 
-#+end_src
+  #+end_src
 
-If Ctr+C Ctr+C does not works showing you the following message: "Evaluation of this sh code block is disabled" then you may have a problem on configuration here is a trick:
+  If Ctr+C Ctr+C does not works showing you the following message: "Evaluation of this sh code block is disabled" then you may have a problem on configuration here is a trick:
 
- - https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
+   - https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
 
-This configuration project also is assuming that the target linux installation uses 'apt' package manager. Because I also have som systema on Fedora that uses 'dnf' package manager you may also find some code to install most used packages.
+  This configuration project also is assuming that the target linux installation uses 'apt' package manager. Because I also have som systema on Fedora that uses 'dnf' package manager you may also find some code to install most used packages.
 
-#+BEGIN_QUOTE
+  #+BEGIN_QUOTE
 
-This kind of errors may happen if you play too much with Emacs or Org package, I came up with this problem in Spacemacs. But in DOOM Emacs worked as expected from the first time. Anyway, if you have further problems let me know!
+   This kind of errors may happen if you play too much with Emacs or Org package, I came up with this problem in Spacemacs. But in DOOM Emacs worked as expected from the first time. Anyway, if you have further problems let me know!
 
-#+END_QUOTE
+  #+END_QUOTE
 
 ** Installing git
 
