@@ -43,7 +43,10 @@
 
   #+RESULTS:
   #+begin_example
-  Showing last 5 changes
+  Showing last 5 changes on the project:
+  -----------------------------------------
+  Updating text and contents on main org file
+
   Added .emacs config to dotfiles
 
   Added Weather info LEAL in xmonad xmobar
@@ -54,8 +57,6 @@
   - Better organization of dotfile folder
   - README.md added
   - Wallpapers updated with latests used
-
-  Added brightness adjustment with super+Y and super+mod+Y
 
   #+end_example
 
@@ -248,11 +249,9 @@ Configuration for transparency in Emacs:
 
     #+end_src
 
-
 ** System
 
 This section is in which i recommend some system tools if not installed.
-
 *** HTop
 
 Mostly (AFAIK) top should be included, but htop is more powerfull and fancy from terminal

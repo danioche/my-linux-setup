@@ -43,6 +43,41 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
+;; 0.1.1 - We ensure that the packages are installed
+;;  from -> https://www.reddit.com/r/emacs/comments/4fqu0a/automatically_install_packages_on_startup/
+(package-initialize)
+
+;; === CUSTOM CHECK FUNCTION ===
+(defun ensure-package-installed (&rest packages)
+  "Assure every package is installed, ask for installation if it’s not.
+   Return a list of installed packages or nil for every skipped package."
+  (mapcar
+   (lambda (package)
+     (unless (package-installed-p package)
+       (package-install package)))
+     packages)
+)
+
+;; === List my packages ===
+;; simply add package names to the list
+;; these are my packages, as you can see in section 0
+(ensure-package-installed
+ 'magit
+ 'helm
+ 'dashboard
+ 'folding
+ 'treemacs
+ 'emojify
+ 'evil
+ 'haskell-mode
+ 'markdown-mode
+ 'ox-hugo
+ 'org-bullets
+ 'org-beautify-theme
+ 'zenburn-theme
+ 'org
+ )
+
 ;; 0.2 - User customization
 ;;
 ;;
