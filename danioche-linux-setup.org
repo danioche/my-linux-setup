@@ -144,7 +144,7 @@ If your Linux is brand new you may need to add your .rsa or create a new one for
 
 /*Obviously*: If you don't have emacs installed and configured you will not be able to execute here the code above, so you may want to visit next section./
 * Tools
-** Main tool EMACS
+** EMACS
 
    The main tool (a part from git :) for taking the most of this
    document is EMACS, you want to have it installed.
@@ -162,9 +162,12 @@ If your Linux is brand new you may need to add your .rsa or create a new one for
 
    #+end_src
 
-   And the flavour that I --like-- liked most is the *spacemacs* https://www.spacemacs.org/
+   And the flavour that I --like-- liked most is the *spacemacs*
+   https://www.spacemacs.org/
 
-   The following lines will move your current personal folder from emacs to back-up (just in case), and then will clone the latest stable repository for espacemacs.
+   The following lines will move your current personal folder from
+   emacs to back-up (just in case), and then will clone the latest
+   stable repository for espacemacs.
 
    #+begin_src sh
 
@@ -173,7 +176,10 @@ If your Linux is brand new you may need to add your .rsa or create a new one for
 
    #+end_src
 
-   With version 25 of EMACS in Ubuntu 18 i found an issue, related to signature update, if you find yourself again with this error you can solve it following the instructions:
+   With version 25 (current version is 27 by the time of writing) of
+   EMACS in Ubuntu 18 i found an issue, related to signature update,
+   if you find yourself again with this error you can solve it
+   following the instructions:
 
    You can check your linux version with the following code:
 
@@ -191,29 +197,19 @@ If your Linux is brand new you may need to add your .rsa or create a new one for
 
 **** My stored spacemacs configuration
 
-Here is the most stable configuration on *.spacemacs* file.
+     Here is the most stable configuration on *.spacemacs* file inside
+     the dotfiles folder.
 
-#+begin_src sh
+     #+begin_src sh
 
-cp ~/.spacemacs ~/.spacemacs.bk
-cp ./spacemacs/.spacemacs ~/.spacemacs
+     cp ~/.spacemacs ~/.spacemacs.bk
+     cp ./dotfiles/spacemacs/.spacemacs ~/.spacemacs
 
-#+end_src
+     #+end_src
 
-Configuration for transparency in Emacs:
-
-#+begin_src sh
-
-;; danioche - transparency
-;; --------
-;;(set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
-;;(set-frame-parameter (selected-frame) 'alpha <both>)
- (set-frame-parameter (selected-frame) 'alpha '(95 . 80))
- (add-to-list 'default-frame-alist '(alpha . (95 . 80)))
-
-#+end_src
-
-***** TODO Move spacemacs configuration to dotfile folder
+***** DONE Move spacemacs configuration to dotfile folder
+      <2021-05-30 dom> Fixed. In fact I was using dotfile folder for
+      storing .emacs
 
 
 *** DOOM EMACS
@@ -234,13 +230,14 @@ Configuration for transparency in Emacs:
     mainly use: ORG, HUGO and some few things, so I preferred to have more
     minimalistic configuration.
 
-*** EMACS my Config
+*** EMACS my own Config
 
     Finally I found myself wanted something less bloated, more
     light. May be I will lose some functionallities but at least I
     will configure the ones that I use.
 
-    At this moment I'm just configuring .emacs file, not dotorg config, for now...
+    At this moment I'm just configuring .emacs file, not dotorg
+    config, for now...
 
     #+begin_src sh
     
@@ -248,21 +245,6 @@ Configuration for transparency in Emacs:
     cp -v ./dotfiles/.emacs ~/.emacs
 
     #+end_src
-
-** System
-
-This section is in which i recommend some system tools if not installed.
-*** HTop
-
-Mostly (AFAIK) top should be included, but htop is more powerfull and fancy from terminal
-
-#+begin_src sh :results output
-
-sudo dnf install htop
-
-#+end_src
-
-#+RESULTS:
 
 ** GIMP
 
@@ -275,83 +257,118 @@ sudo apt-get install gimp
 #+end_src
 
 * Terminal
+** System
+   This section is in which i recommend some system tools if not installed.
+
+*** HTop                                                  :system:monitoring:
+
+    Mostly (AFAIK) top should be included, but htop is more powerfull
+    and fancy from terminal
+
+    #+begin_src sh :results output
+
+    sudo dnf install htop
+
+    #+end_src
+
+    #+RESULTS:
+
+*** Bashtop                                               :system:monitoring:
+    
+    Very nice application to be installed, all the linux youtubers use
+    it, so you should so, shouldn't? B)
+
+    #+BEGIN_SRC sh
+    
+    sudo dnf install bashtop 
+    
+    #+END_SRC
+
+
 ** Powerline
-Powerline is a very usefull aplication when you use git, I recommend to install it. More info at: 
 
-#+begin_src sh
+   Powerline is a very usefull aplication when you use git, I recommend
+   to install it. More info at:
 
-sudo apt-get install fonts-powerline powerline
+   #+begin_src sh
 
-#+end_src
+   sudo apt-get install fonts-powerline powerline
 
-For DNF package manager
-#+begin_src sh
+   #+end_src
 
-sudo dnf install powerline
+   For DNF package manager
 
-#+end_src
+   #+begin_src sh
 
-After installation you should include into your .bashrc the initialization of the powerline, for doing this first check your installation path
+   sudo dnf install powerline
 
-#+begin_src sh
+   #+end_src
 
-whereis powerline
+   #+RESULTS:
 
-#+end_src
-#+RESULTS:
-: powerline: /usr/bin/powerline /usr/share/powerline /usr/share/man/man1/powerline.1.gz
+   After installation you should include into your .bashrc the
+   initialization of the powerline, for doing this first check your
+   installation path
+   
+   #+begin_src sh
 
-You should have a script to be included on your .bashrc: 
+   whereis powerline
 
-#+begin_src sh
+   #+end_src
+   #+RESULTS:
+   : powerline: /usr/bin/powerline /usr/share/powerline /usr/share/man/man1/powerline.1.gz
 
-ls -l /usr/share/powerline/bash/powerline.sh
+   You should have a script to be included on your .bashrc: 
 
-#+end_src
-#+RESULTS:
-: -rw-r--r--. 1 root root 4183 jul 29 17:13 /usr/share/powerline/bash/powerline.sh
+   #+begin_src sh
 
-If th above is working then you can addit executing the following code:
+   ls -l /usr/share/powerline/bash/powerline.sh
 
-#+begin_src sh
+   #+end_src
+   #+RESULTS:
+   : -rw-r--r--. 1 root root 4183 jul 29 17:13 /usr/share/powerline/bash/powerline.sh
 
-cp ~/.bashrc ~/.bashrc.bk
-echo "# Powerline" >> ~/.bashrc
-echo "export PATH=$PATH:$HOME/Library/Python/2.7/bin" >> ~/.bashrc
-echo "powerline-daemon -q" >> ~/.bashrc
-echo "POWERLINE_BASH_CONTINUATION=1" >>  ~/.bashrc
-echo "POWERLINE_BASH_SELECT=1" >> ~/.bashrc
-echo ". /usr/share/powerline/bash/powerline.sh" >> ~/.bashrc
-echo "Done! :)"
+   If th above is working then you can addit executing the following code:
 
-#+end_src
+   #+begin_src sh
 
-#+RESULTS:
-: Done! :)
+   cp ~/.bashrc ~/.bashrc.bk
+   echo "# Powerline" >> ~/.bashrc
+   echo "export PATH=$PATH:$HOME/Library/Python/2.7/bin" >> ~/.bashrc
+   echo "powerline-daemon -q" >> ~/.bashrc
+   echo "POWERLINE_BASH_CONTINUATION=1" >>  ~/.bashrc
+   echo "POWERLINE_BASH_SELECT=1" >> ~/.bashrc
+   echo ". /usr/share/powerline/bash/powerline.sh" >> ~/.bashrc
+   echo "Done! :)"
 
-Check your Python version BTW
+   #+end_src
 
-#+begin_src sh :results output
+   #+RESULTS:
+   : Done! :)
 
-python -V
+   Check your Python version BTW
 
-#+end_src
+   #+begin_src sh :results output
 
-#+RESULTS:
+   python -V
 
-Now you want to add to the powerline the git theme on Shell, this is very easy!
-I added in the repo my config file for this (very standard BTW).
+   #+end_src
 
-#+begin_src sh
+   #+RESULTS:
 
-cp /usr/share/powerline/config_files/config.json ./config.json.bk
-cp ./powerline-conf/config.json /usr/share/powerline/config_files/
+   Now you want to add to the powerline the git theme on Shell, this is very easy!
+   I added in the repo my config file for this (very standard BTW).
 
-#+end_src
+   #+begin_src sh
 
-You will need to open a new terminal after changing the *config.json* file.
+   cp /usr/share/powerline/config_files/config.json ./config.json.bk
+   cp ./powerline-conf/config.json /usr/share/powerline/config_files/
 
-More info: https://devpro.media/install-powerline-ubuntu/#edit-your-powerline-configuration
+   #+end_src
+
+   You will need to open a new terminal after changing the *config.json* file.
+
+   More info: https://devpro.media/install-powerline-ubuntu/#edit-your-powerline-configuration
 
 *** TODO To improve colors in powerline-git config to show changes on directory are pending
 
