@@ -155,7 +155,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Put status bar in second monitor
     , ((modm              , xK_b     ), spawn "xmobar -x 1 -A 165 ~/.xmobarrc")
+    -- Additional status bar in bottom Weather info
+    , ((modm .|. shiftMask, xK_b     ), spawn "xmobar -x 1 -A 165 ~/.xmobarrcWeather")
 
+    
     -- Set Brightness with custom-script using xrandr
     , ((modm              , xK_y    ), spawn "~/.xmonad/set-Brightness.sh +")
     , ((modm .|. shiftMask, xK_y    ), spawn "~/.xmonad/set-Brightness.sh")

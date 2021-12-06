@@ -1,0 +1,10 @@
+Config { font = "xft:Source Code Pro:size=9,Hack:size=9,Font Awesome:size=9" ,
+       bgColor = "black" , fgColor = "grey" , position = Bottom ,
+       lowerOnStart = True ,
+       commands = [
+       		Run Com "/home/danioche/.xmonad/get-Weather.sh" [] "myWeather" 1800
+       		],
+	sepChar= "%" ,
+	alignSep = "}{" ,
+	template = "} { %myWeather%"
+	}

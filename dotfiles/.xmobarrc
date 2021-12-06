@@ -1,31 +1,16 @@
-Config { font = "xft:DejaVu Sans Mono:size=10,Font Awesome:size=9"
-       , bgColor = "black"
-       , fgColor = "grey"
-       , position = Top
-       , lowerOnStart = True
-       , commands = [ Run Network "wlp1s0" ["-L","0","-H","15000","--normal","green","--high","red","-S","True","--template","<fc=#04d9ff></fc> <rx>|<tx>"] 10
-                    , Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red","-t","<fc=#04d9ff></fc> <bar>"] 10
-                    , Run Memory ["-t","<fc=#04d9ff></fc> <usedratio>%"] 10
-                    , Run Swap ["-t", "<fc=#04d9ff>S</fc> <usedratio>%"] 10
-                    , Run Com "/home/danioche/.xmonad/get-Battery.sh" [] "myBatt" 60
-                    , Run WeatherX "LEAL"
-                          [ ("clear", "🌣")
-                          , ("sunny", "🌣")
-                          , ("mostly clear", "🌤")
-                          , ("mostly sunny", "🌤")
-                          , ("partly sunny", "⛅")
-                          , ("fair", "🌑")
-                          , ("cloudy","☁")
-                          , ("overcast","☁")
-                          , ("partly cloudy", "⛅")
-                          , ("mostly cloudy", "🌧")
-                          , ("considerable cloudiness", "⛈")]
-                          ["-t", "<fc=#04d9ff>W</fc> <tempC>º  <rh>%   <windCardinal>(<windAzimuth>º)  <windKnots>"
-                          , "-L","10", "-H", "25", "--normal", "black"
-                          , "--high", "lightgoldenrod4", "--low", "darkseagreen4"] 18000
-                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-                    ]
-       , sepChar = "%"
-       , alignSep = "}{"
-       , template = "%multicpu% | %memory% %swap% | %wlp1s0% }<fc=#ee9a00> %date%</fc>{ %LEAL% | %myBatt%"
-}
+Config { font = "xft:Source Code Pro:size=10,Hack:size=9,Font Awesome:size=9" ,
+       bgColor = "black" , fgColor = "grey" , position = Top ,
+       lowerOnStart = True ,
+       commands = [
+       		Run Network "wlp1s0"
+       		    ["-L","0","-H","15000","--normal","green","--high","red","-S","True","--template","<fc=#04d9ff></fc> <rx>|<tx>"] 10 ,
+		Run MultiCpu
+       		    ["-L","3","-H","50","--normal","green","--high","red","-t","<fc=#04d9ff></fc> <bar>"] 10 ,
+		Run Memory ["-t","<fc=#04d9ff></fc> <usedratio>%"] 10 ,
+		Run Swap ["-t","<fc=#04d9ff>S</fc> <usedratio>%"] 10 ,
+		Run Com "/home/danioche/.xmonad/get-Battery.sh" [] "myBatt" 60,
+		Run Com "/home/danioche/.xmonad/get-Weather.sh" [] "myWeather" 1800,
+       		Run Date "%a %b %_d %Y %H:%M:%S" "date" 10],
+	sepChar= "%" ,
+	alignSep = "}{" ,
+	template = "%multicpu% | %memory% %swap% | %wlp1s0% }<fc=#ee9a00> %date%</fc>{ %myWeather%|%myBatt%" }

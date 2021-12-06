@@ -138,21 +138,23 @@
 ;;
 (set-cursor-color "red")
 
-;; Line numbers
-;;
+;; Line numbers with linum
+;; -> reference on different approaches here: https://www.emacswiki.org/emacs/LineNumbers
 (require 'display-line-numbers)
-(defcustom display-line-numbers-exempt-modes '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode)
-  "Major modes on which to disable the linum mode, exempts them from global requirement"
+
+(defcustom display-line-numbers-exempt-modes
+  '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode)
+  "Major modes on which to disable line numbers."
   :group 'display-line-numbers
   :type 'list
-  :version "green")
+  :version "gray")
 
 (defun display-line-numbers--turn-on ()
-  "turn on line numbers but excempting certain majore modes defined in `display-line-numbers-exempt-modes'"
-  (if (and
-       (not (member major-mode display-line-numbers-exempt-modes))
-       (not (minibufferp)))
-      (display-line-numbers-mode)))
+  "Turn on line numbers except for certain major modes.
+Exempt major modes are defined in `display-line-numbers-exempt-modes'."
+  (unless (or (minibufferp)
+              (member major-mode display-line-numbers-exempt-modes))
+    (display-line-numbers-mode)))
 
 (global-display-line-numbers-mode)
 
@@ -160,6 +162,8 @@
 ;;
 (global-hl-line-mode 1)
 (show-paren-mode 1)
+
+
 
 ;; Treemacs - Project folder navigator
 ;;  - https://github.com/Alexander-Miller/treemacs
@@ -258,9 +262,6 @@
 (with-eval-after-load 'ox
   (require 'ox-hugo))
 
-;; - Just in case you want your todo list at the beginning
-;; (org-agenda nil "t") 
-
 ;; 3.0 Start / Home page
 
 ;; 3.1 - Dashboard
@@ -268,7 +269,7 @@
 ;; -> https://github.com/emacs-dashboard/emacs-dashboard
 ;;
     (setq dashboard-banner-logo-title "I can't believe today was a good day.")
-    (setq dashboard-startup-banner "~/Imágenes/emacsHole.png")
+    (setq dashboard-startup-banner "~/Imágenes/art/linuxIsFun.png")
     (setq dashboard-items '((recents  . 3)
                             (bookmarks . 3)
 			    ))
