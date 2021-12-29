@@ -45,15 +45,15 @@
   #+begin_example
   Showing last 5 changes on the project:
   -----------------------------------------
+  Weather scripts and Xmobar review, Added bottom bar in Xmonad cfg
+
+  Small changes on format
+
   Spacemacs config moved to dotfiles and small text improvements
 
   .emacs improved - auto-install of packages added
 
   Updating text and contents on main org file
-
-  Added .emacs config to dotfiles
-
-  Added Weather info LEAL in xmonad xmobar
 
   #+end_example
 
@@ -117,7 +117,7 @@ I love minimal installations ( I still remember the installations of Slackware t
   #+end_src
 
   #+RESULTS:
-  : git version 2.29.2
+  : git version 2.31.1
 
   If Ctr+C Ctr+C does not works showing you the following message:
   "Evaluation of this sh code block is disabled" then you may have a
@@ -263,7 +263,7 @@ I love minimal installations ( I still remember the installations of Slackware t
     #+begin_src sh
     
     mv -v ~/.emacs ~/.emacs.bk
-    cp -v ./dotfiles/.emacs ~/.emacs
+    cp -v ./dotfiles/emacs/.emacs ~/.emacs
 
     #+end_src
 
@@ -285,6 +285,120 @@ I love minimal installations ( I still remember the installations of Slackware t
 
    #+end_src
 
+** Dotfiles directories check
+
+   This is a diff tool to check if the current configuration on your
+   systems is updated with the stored configuration on this project.
+
+   Based on post: https://www.shellhacks.com/create-patch-diff-command-linux/
+
+   #+name: OverallChecks 
+   #+begin_src sh :results output
+
+     echo "Project configuration on dotfiles:"
+
+     ls -laR ./dotfiles/ 
+     echo " "
+     echo "Checking local Xmonad config vs. Danioche's config: "
+     diff -rN --brief ./dotfiles/.xmonad/ ~/.xmonad > checks.xmonad
+     cat checks.xmonad
+
+
+
+   #+end_src  
+
+   #+RESULTS: OverallChecks
+   #+begin_example
+   Project configuration on dotfiles:
+   ./dotfiles/:
+   total 0
+   drwxrwxr-x. 1 danioche danioche  68 dic 29 12:20 .
+   drwxrwxr-x. 1 danioche danioche 418 dic 29 12:54 ..
+   drwxrwxr-x. 1 danioche danioche  12 dic 29 12:18 emacs
+   drwxrwxr-x. 1 danioche danioche  20 may 23  2021 spacemacs
+   drwxrwxr-x. 1 danioche danioche  50 dic 29 12:20 xmobar
+   drwxrwxr-x. 1 danioche danioche  14 dic 29 12:18 xmonad
+   drwxrwxr-x. 1 danioche danioche  18 dic 29 12:20 xsession
+
+   ./dotfiles/emacs:
+   total 12
+   drwxrwxr-x. 1 danioche danioche   12 dic 29 12:18 .
+   drwxrwxr-x. 1 danioche danioche   68 dic 29 12:20 ..
+   -rw-rw-r--. 1 danioche danioche 9121 dic 29 12:18 .emacs
+
+   ./dotfiles/spacemacs:
+   total 20
+   drwxrwxr-x. 1 danioche danioche    20 may 23  2021 .
+   drwxrwxr-x. 1 danioche danioche    68 dic 29 12:20 ..
+   -rw-rw-r--. 1 danioche danioche 19412 may 23  2021 .spacemacs
+
+   ./dotfiles/xmobar:
+   total 8
+   drwxrwxr-x. 1 danioche danioche  50 dic 29 12:20 .
+   drwxrwxr-x. 1 danioche danioche  68 dic 29 12:20 ..
+   -rw-rw-r--. 1 danioche danioche 929 dic 29 12:20 .xmobarrc
+   -rw-r--r--. 1 danioche danioche 351 dic 29 12:20 .xmobarrcWeather
+
+   ./dotfiles/xmonad:
+   total 0
+   drwxrwxr-x. 1 danioche danioche  14 dic 29 12:18 .
+   drwxrwxr-x. 1 danioche danioche  68 dic 29 12:20 ..
+   drwxrwxr-x. 1 danioche danioche 232 dic 29 12:18 .xmonad
+
+   ./dotfiles/xmonad/.xmonad:
+   total 44
+   drwxrwxr-x. 1 danioche danioche   232 dic 29 12:18 .
+   drwxrwxr-x. 1 danioche danioche    14 dic 29 12:18 ..
+   -rwxrwxr-x. 1 danioche danioche  1189 dic 29 12:18 get-Battery.sh
+   -rwxrwxr-x. 1 danioche danioche   267 dic 29 12:18 get-Volume.sh
+   -rw-rw-r--. 1 danioche danioche  2040 dic 29 12:18 get-Weather.history
+   -rw-r--r--. 1 danioche danioche    52 dic 29 12:18 get-Weather.log
+   -rwxrwxr-x. 1 danioche danioche  2500 dic 29 12:18 get-Weather.sh
+   -rwxrwxr-x. 1 danioche danioche  1686 dic 29 12:18 get-Weather.sh~
+   -rwxrwxr-x. 1 danioche danioche   318 dic 29 12:18 set-Brightness.sh
+   -rwxrwxr-x. 1 danioche danioche 12638 dic 29 12:18 xmonad.hs
+
+   ./dotfiles/xsession:
+   total 4
+   drwxrwxr-x. 1 danioche danioche  18 dic 29 12:20 .
+   drwxrwxr-x. 1 danioche danioche  68 dic 29 12:20 ..
+   -rwxrwxr-x. 1 danioche danioche 189 dic 29 12:20 .xsession
+
+   Checking local Xmonad config vs. Danioche's config: 
+   Los ficheros ./dotfiles/.xmonad/get-Battery.sh y /home/danioche/.xmonad/get-Battery.sh son distintos
+   Los ficheros ./dotfiles/.xmonad/get-Vol.sh y /home/danioche/.xmonad/get-Vol.sh son distintos
+   Los ficheros ./dotfiles/.xmonad/get-Volume.sh y /home/danioche/.xmonad/get-Volume.sh son distintos
+   Los ficheros ./dotfiles/.xmonad/get-Weather.history y /home/danioche/.xmonad/get-Weather.history son distintos
+   Los ficheros ./dotfiles/.xmonad/get-Weather.log y /home/danioche/.xmonad/get-Weather.log son distintos
+   Los ficheros ./dotfiles/.xmonad/get-Weather.sh y /home/danioche/.xmonad/get-Weather.sh son distintos
+   Los ficheros ./dotfiles/.xmonad/get-Weather.sh~ y /home/danioche/.xmonad/get-Weather.sh~ son distintos
+   Los ficheros ./dotfiles/.xmonad/icons.all y /home/danioche/.xmonad/icons.all son distintos
+   Los ficheros ./dotfiles/.xmonad/sailing-conditions.info y /home/danioche/.xmonad/sailing-conditions.info son distintos
+   Los ficheros ./dotfiles/.xmonad/set-Brightness.sh y /home/danioche/.xmonad/set-Brightness.sh son distintos
+   Los ficheros ./dotfiles/.xmonad/test.wttr y /home/danioche/.xmonad/test.wttr son distintos
+   Los ficheros ./dotfiles/.xmonad/weather-status.info y /home/danioche/.xmonad/weather-status.info son distintos
+   Los ficheros ./dotfiles/.xmonad/xmonad.errors y /home/danioche/.xmonad/xmonad.errors son distintos
+   Los ficheros ./dotfiles/.xmonad/xmonad.hi y /home/danioche/.xmonad/xmonad.hi son distintos
+   Los ficheros ./dotfiles/.xmonad/xmonad.hs y /home/danioche/.xmonad/xmonad.hs son distintos
+   Los ficheros ./dotfiles/.xmonad/xmonad.hs~ y /home/danioche/.xmonad/xmonad.hs~ son distintos
+   Los ficheros ./dotfiles/.xmonad/xmonad.o y /home/danioche/.xmonad/xmonad.o son distintos
+   Los ficheros ./dotfiles/.xmonad/xmonad-x86_64-linux y /home/danioche/.xmonad/xmonad-x86_64-linux son distintos
+   #+end_example
+
+   With the following command you can patch your current xmonad version with the differences.
+   
+   #+NAME: PatchingDirectories
+   #+BEGIN_SRC sh :results output
+
+     # checking .xmonad dir
+     diff  -ruN ./dotfiles/.xmonad ~/.xmonad > patch.xmonad
+     cat patch.xmonad | wc -l
+
+   #+END_SRC
+
+   #+RESULTS:
+   : 5528
+   
 * Terminal
 ** system
    This section is in which i recommend some system tools if not installed.
@@ -597,7 +711,6 @@ I love minimal installations ( I still remember the installations of Slackware t
 
    #+RESULTS:
 
-
 *** Using weather-util
     
     Nice utility from one-developer, nice to read the README of this
@@ -791,7 +904,6 @@ I love minimal installations ( I still remember the installations of Slackware t
     | 256-WSW | 0.81 | 183-S | 4.92 | 0.03 | 49-NE | 6.65  
 
     #+end_example
-
     
 ** Fonts
 
@@ -970,6 +1082,8 @@ I love minimal installations ( I still remember the installations of Slackware t
 
     #+end_src
 
+*** Improvements and to-do's [0/1]
+**** TODO Music from console 
 ** Presentations
 *** reveal-js for Spaceemacs configuration
 
@@ -1083,7 +1197,7 @@ I love minimal installations ( I still remember the installations of Slackware t
    #+begin_src sh :results output
 
      printf "Check config and other scripts used by Xmonad and Xmobar:\n\n"
-     ls -l dotfiles/.xmo*
+     ls -alR dotfiles/xmo*
 
    #+end_src
 
@@ -1091,21 +1205,31 @@ I love minimal installations ( I still remember the installations of Slackware t
    #+begin_example
    Check config and other scripts used by Xmonad and Xmobar:
 
-   -rw-r--r--. 1 danioche danioche 1863 ene 24 10:18 dotfiles/.xmobarrc
+   dotfiles/xmobar:
+   total 8
+   drwxrwxr-x. 1 danioche danioche  50 dic 29 12:20 .
+   drwxrwxr-x. 1 danioche danioche  68 dic 29 12:20 ..
+   -rw-rw-r--. 1 danioche danioche 929 dic 29 12:20 .xmobarrc
+   -rw-r--r--. 1 danioche danioche 351 dic 29 12:20 .xmobarrcWeather
 
-   dotfiles/.xmonad:
-   total 5384
-   -rwxrwxrwx. 1 danioche danioche     793 ene  1 19:15 get-Battery.sh
-   -rwxrwxrwx. 1 danioche danioche     267 dic 26 21:07 get-Volume.sh
-   -rwxrwxrwx. 1 danioche danioche    1245 ene  4 19:20 get-Weather.sh
-   -rwxrwxrwx. 1 danioche danioche   30255 dic 27 20:45 icons.all
-   -rwxrwxrwx. 1 danioche danioche     318 ene 23 19:13 set-Brightness.sh
-   -rwxrwxrwx. 1 danioche danioche     345 ene  6 18:59 weather-status.info
-   -rwxrwxrwx. 1 danioche danioche     560 ene  9 11:49 xmonad.errors
-   -rwxrwxrwx. 1 danioche danioche    3834 ene  8 19:38 xmonad.hi
-   -rwxrwxrwx. 1 danioche danioche   12405 ene 23 19:13 xmonad.hs
-   -rw-r--r--. 1 danioche danioche   76568 ene  9 11:49 xmonad.o
-   -rwxr-xr-x. 1 danioche danioche 5357008 ene  9 11:49 xmonad-x86_64-linux
+   dotfiles/xmonad:
+   total 0
+   drwxrwxr-x. 1 danioche danioche  14 dic 29 12:18 .
+   drwxrwxr-x. 1 danioche danioche  68 dic 29 12:20 ..
+   drwxrwxr-x. 1 danioche danioche 232 dic 29 12:18 .xmonad
+
+   dotfiles/xmonad/.xmonad:
+   total 44
+   drwxrwxr-x. 1 danioche danioche   232 dic 29 12:18 .
+   drwxrwxr-x. 1 danioche danioche    14 dic 29 12:18 ..
+   -rwxrwxr-x. 1 danioche danioche  1189 dic 29 12:18 get-Battery.sh
+   -rwxrwxr-x. 1 danioche danioche   267 dic 29 12:18 get-Volume.sh
+   -rw-rw-r--. 1 danioche danioche  2040 dic 29 12:18 get-Weather.history
+   -rw-r--r--. 1 danioche danioche    52 dic 29 12:18 get-Weather.log
+   -rwxrwxr-x. 1 danioche danioche  2500 dic 29 12:18 get-Weather.sh
+   -rwxrwxr-x. 1 danioche danioche  1686 dic 29 12:18 get-Weather.sh~
+   -rwxrwxr-x. 1 danioche danioche   318 dic 29 12:18 set-Brightness.sh
+   -rwxrwxr-x. 1 danioche danioche 12638 dic 29 12:18 xmonad.hs
    #+end_example
 
    Here is the configuration for xmobar
@@ -1150,3 +1274,4 @@ I love minimal installations ( I still remember the installations of Slackware t
 	  , template = "%multicpu% | %memory% %swap% | %wlp1s0% }<fc=#ee9a00> %date%</fc>{ %LEAL% | %myBatt%"
    }
    #+end_example
+

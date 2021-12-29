@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-06 sáb 00:48 -->
+<!-- 2021-12-29 mié 12:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Danioche Linux set-up and customization</title>
@@ -40,78 +40,83 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org2714719">1. About</a>
+<li><a href="#org46ceba4">1. About</a>
 <ul>
-<li><a href="#orgb45b4a1">1.1. Check your space</a></li>
-<li><a href="#org82307e1">1.2. Improvements</a></li>
+<li><a href="#orga324772">1.1. Check your space</a></li>
+<li><a href="#org1d0d0aa">1.2. Improvements</a></li>
 </ul>
 </li>
-<li><a href="#org2a2dca2">2. This project</a>
+<li><a href="#orgd84d7f8">2. This project</a>
 <ul>
-<li><a href="#orgf5c8b75">2.1. Installing git</a></li>
+<li><a href="#org6be04f4">2.1. Installing git</a></li>
 </ul>
 </li>
-<li><a href="#org5b67eeb">3. Tools</a>
+<li><a href="#orga620f62">3. Tools</a>
 <ul>
-<li><a href="#org5e5de88">3.1. Main tool EMACS, flavored</a></li>
-<li><a href="#org1b43254">3.2. System</a></li>
-<li><a href="#org547d458">3.3. GIMP</a></li>
+<li><a href="#orgc2120a0">3.1. EMACS</a></li>
+<li><a href="#orge4dc593">3.2. GIMP</a></li>
+<li><a href="#org5acb874">3.3. DotNet check</a></li>
 </ul>
 </li>
-<li><a href="#orgaaa39d7">4. Terminal</a>
+<li><a href="#org540537b">4. Terminal</a>
 <ul>
-<li><a href="#orgcb41282">4.1. Powerline</a></li>
-<li><a href="#orgc9cbd21">4.2. Some fun</a></li>
-<li><a href="#org3a37840">4.3. Fonts</a></li>
+<li><a href="#org8a0cfbb">4.1. system</a></li>
+<li><a href="#orge23c443">4.2. Powerline</a></li>
+<li><a href="#org2daae02">4.3. Some fun</a></li>
+<li><a href="#orgbed10ef">4.4. Weather info</a></li>
+<li><a href="#org3cb440f">4.5. Fonts</a></li>
 </ul>
 </li>
-<li><a href="#org8036576">5. Productivity</a>
+<li><a href="#org6c996de">5. Productivity</a>
 <ul>
-<li><a href="#orgc8bc256">5.1. Code snipets</a></li>
-<li><a href="#org6292512">5.2. Music</a></li>
-<li><a href="#orgbd42b0b">5.3. Presentations</a></li>
+<li><a href="#org56798ed">5.1. Code snipets</a></li>
+<li><a href="#orgbf4ff4c">5.2. Music</a></li>
+<li><a href="#org2b87516">5.3. Presentations</a></li>
 </ul>
 </li>
-<li><a href="#org7286756">6. Destkop</a>
+<li><a href="#org7220a7a">6. Blogging</a></li>
+<li><a href="#orgedde110">7. Destkop Customization</a>
 <ul>
-<li><a href="#orgc9f9d01">6.1. GDM - Fedora login screen background</a></li>
-<li><a href="#orga073f1d">6.2. i3 tiling windows manager</a></li>
-<li><a href="#org7840750">6.3. xmonad tiling windows manager</a></li>
+<li><a href="#orgc7db448">7.1. GDM - Fedora login screen background</a></li>
+<li><a href="#org7bbe94d">7.2. i3 tiling windows manager</a></li>
+<li><a href="#org6e409dc">7.3. xmonad tiling windows manager</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-
-<div id="outline-container-org2714719" class="outline-2">
-<h2 id="org2714719"><span class="section-number-2">1</span> About</h2>
+<div id="outline-container-org46ceba4" class="outline-2">
+<h2 id="org46ceba4"><span class="section-number-2">1</span> About</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-This document should be used to help to configure <b>mostly any</b> <i>Ubuntu</i> (and recently <i>Fedora</i>) distro to working-distro with the most common set-up that I&rsquo;m used to.
+This document it's aimed to help to configure <b>mostly any</b> <i>Ubuntu</i>
+(and recently <i>Fedora</i>) distro to working-distro with the most
+common set-up that I'm used to.  The distro-dependency is because
+this includes some package-managers-dependency, I include on the
+codes some scripting in shell for invoquing the installation.  Main
+tools, corporate and productivity tools; and of course with the
+look&amp;feel from a preconfigured repo.
 </p>
 
 <p>
-Main tools, corporate and productivity tools; and of course with the look&amp;feel from a preconfigured repo.
-</p>
-
-<p>
-Following literate documentation approach, inspiring post: <a href="http://cachestocaches.com/2018/6/org-literate-programming/">http://cachestocaches.com/2018/6/org-literate-programming/</a> 
+Following literate documentation approach, inspiring post:
+<a href="http://cachestocaches.com/2018/6/org-literate-programming/">http://cachestocaches.com/2018/6/org-literate-programming/</a>
 </p>
 
 <blockquote>
 <p>
 
-</p>
-
-<p>
-All the shell code here comes without any warranty, AT ALL, execute it (or not) at your own risk.
-I assume that you understand the code, you can modif, use it, post it, or whatever, at your own risk :)
+All the shell code here comes without any warranty, AT ALL,
+execute it (or not) at your own risk.  I assume that you
+understand the code, you can modif, use it, post it, or whatever,
+at your own risk :)
 </p>
 </blockquote>
 
 <p>
-Also, document format for exporting in HTML is from <a href="https://gongzhitaao.org/orgcss/">gongzhitaao</a>, clean and nice CSS, very useful. Thanks!
+Also, document format for exporting in HTML is from <a href="https://gongzhitaao.org/orgcss/">gongzhitaao</a>,
+clean and nice CSS, very useful. Thanks!
 </p>
 
 <p>
@@ -120,17 +125,23 @@ Bellow the latest commit mesage:
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">git</span> log -1 --pretty=%B
+echo "Showing last 5 changes on the project:"
+echo "-----------------------------------------"
+git log -5 --pretty=%B --date=relative
 
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgb45b4a1" class="outline-3">
-<h3 id="orgb45b4a1"><span class="section-number-3">1.1</span> Check your space</h3>
+
+<div id="outline-container-orga324772" class="outline-3">
+<h3 id="orga324772"><span class="section-number-3">1.1</span> Check your space</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-You may want to check your disk space befor continue on this customization. Some software (if you decide) will be installed in your system so if you are runing with limmited amout on space this could be useful:
+You may want to check your disk space befor continue on this
+customization. Some software (if you decide) will be installed in
+your system so if you are runing with limmited amout on space this
+could be useful:
 </p>
 
 <div class="org-src-container">
@@ -147,60 +158,73 @@ I love minimal installations ( I still remember the installations of Slackware t
 </div>
 </div>
 
-<div id="outline-container-org82307e1" class="outline-3">
-<h3 id="org82307e1"><span class="section-number-3">1.2</span> Improvements</h3>
+<div id="outline-container-org1d0d0aa" class="outline-3">
+<h3 id="org1d0d0aa"><span class="section-number-3">1.2</span> Improvements</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 In this section I will record some taks and TODOs for future versions
 </p>
 </div>
 
-<div id="outline-container-org962b26c" class="outline-4">
-<h4 id="org962b26c"><span class="section-number-4">1.2.1</span> <span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-01-17 dom&gt; </span></span> Export configuration</h4>
+<div id="outline-container-org23421b8" class="outline-4">
+<h4 id="org23421b8"><span class="section-number-4">1.2.1</span> <span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-01-17 dom&gt; </span></span> Export configuration</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
-Configuration using gongzhintaao CSS that is enough for now, maybe we could add future improvements.
+Configuration using gongzhintaao CSS that is enough for now, maybe we
+could add future improvements.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org47194da" class="outline-4">
-<h4 id="org47194da"><span class="section-number-4">1.2.2</span> <span class="todo TODO">TODO</span> Backup section</h4>
+<div id="outline-container-orge1eaa35" class="outline-4">
+<h4 id="orge1eaa35"><span class="section-number-4">1.2.2</span> <span class="todo TODO">TODO</span> Backup section</h4>
 </div>
-<div id="outline-container-org28900b1" class="outline-4">
-<h4 id="org28900b1"><span class="section-number-4">1.2.3</span> <span class="todo TODO">TODO</span> Auto-install scripts</h4>
+<div id="outline-container-org0d59d31" class="outline-4">
+<h4 id="org0d59d31"><span class="section-number-4">1.2.3</span> <span class="todo TODO">TODO</span> Auto-install scripts</h4>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org2a2dca2" class="outline-2">
-<h2 id="org2a2dca2"><span class="section-number-2">2</span> This project</h2>
+<div id="outline-container-orgd84d7f8" class="outline-2">
+<h2 id="orgd84d7f8"><span class="section-number-2">2</span> This project</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-The structure that I want is a private repository (If you are reading this is because you colaborate or I decided that the project is mature enough to make it public) that will have all the scripts needed to config the new distro.
+The structure that I want is a private repository (If you are
+reading this is because you colaborate or I decided that the project
+is mature enough to make it public) that will have all the scripts
+needed to config the new distro.
 </p>
 
 <p>
-Ansible and playbooks are also options to take into account but, because the distro is configured for using as &ldquo;regular-manager/coder-user&rdquo; I don&rsquo;t need any specific &ldquo;server-side&rdquo; conditions. So I decided more the literate-programming approach to fullfil my customization requirements.
+Ansible and playbooks are also options to take into account but,
+because the distro is configured for using as
+"regular-manager/coder-user" I don't need any specific "server-side"
+conditions. So I decided more the literate-programming approach to
+fullfil my customization requirements.
 </p>
 
 <p>
-Obviously what is inside is this main ORG file, that is a literate document; so once you installed Emacs and Spacemacs you will be able to execute the configurations as you wish.
+Obviously what is inside is this main ORG file, that is a literate
+document; so once you installed Emacs and Spacemacs you will be able
+to execute the configurations as you wish.
 </p>
 
 <p>
-Summarizing, the step-0 is to have git (if you are reading this document sequentialy you may have needed before).
+Summarizing, the step-0 is to have git (if you are reading this
+document sequentialy you may have needed before).
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">git</span> version
+git version
 
 </pre>
 </div>
 
 <p>
-If Ctr+C Ctr+C does not works showing you the following message: &ldquo;Evaluation of this sh code block is disabled&rdquo; then you may have a problem on configuration here is a trick:
+If Ctr+C Ctr+C does not works showing you the following message:
+"Evaluation of this sh code block is disabled" then you may have a
+problem on configuration here is a trick:
 </p>
 
 <ul class="org-ul">
@@ -208,7 +232,10 @@ If Ctr+C Ctr+C does not works showing you the following message: &ldquo;Evaluati
 </ul>
 
 <p>
-This configuration project also is assuming that the target linux installation uses &rsquo;apt&rsquo; package manager. Because I also have som systema on Fedora that uses &rsquo;dnf&rsquo; package manager you may also find some code to install most used packages.
+This configuration project also is assuming that the target linux
+installation uses 'apt' package manager. Because I also have som
+systema on Fedora that uses 'dnf' package manager you may also find
+some code to install most used packages.
 </p>
 
 <blockquote>
@@ -217,60 +244,66 @@ This configuration project also is assuming that the target linux installation u
 </p>
 
 <p>
-This kind of errors may happen if you play too much with Emacs or Org package, I came up with this problem in Spacemacs. But in DOOM Emacs worked as expected from the first time. Anyway, if you have further problems let me know!
+This kind of errors may happen if you play too much with Emacs or
+Org package, I came up with this problem in Spacemacs. But in DOOM
+Emacs worked as expected from the first time. Anyway, if you have
+further problems let me know!
 </p>
 </blockquote>
 </div>
 
-<div id="outline-container-orgf5c8b75" class="outline-3">
-<h3 id="orgf5c8b75"><span class="section-number-3">2.1</span> Installing git</h3>
+<div id="outline-container-org6be04f4" class="outline-3">
+<h3 id="org6be04f4"><span class="section-number-3">2.1</span> Installing git</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-Welcome to 2021, it&rsquo;s time to do it! :)
+Welcome to 2021, it's time to do it! :). 
 </p>
 
 <p>
-The following command may be not fully working from this documentation, but you can copy-paste to install it.
+The following command may be not fully working from this documentation, but you can
+copy-paste to install it.
 </p>
-
-
-
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">sudo</span> apt-get install <span style="color: #ECBE7B;">git</span>
+sudo apt-get install git
 
 </pre>
 </div>
 
 <p>
-If your Linux is brand new you may need to add your .rsa or create a new one for the nes OS, follow the instructions here:
+If your Linux is brand new you may need to add your .rsa or create
+a new one for the nes OS, follow the instructions here:
 </p>
 
 <ul class="org-ul">
 <li><a href="https://github.com/settings/keys">https://github.com/settings/keys</a></li>
-
-<li>Help info: 
-<ul class="org-ul">
-<li><a href="https://help.github.com/articles/generating-a-gpg-key/">https://help.github.com/articles/generating-a-gpg-key/</a></li>
-</ul></li>
 </ul>
 
 <p>
-<i><b>Obviously</b>: If you don&rsquo;t have emacs installed and configured you will not be able to execute here the code above, so you may want to visit next section.</i>
+Help info: 
+</p>
+<ul class="org-ul">
+<li><a href="https://help.github.com/articles/generating-a-gpg-key/">https://help.github.com/articles/generating-a-gpg-key/</a></li>
+</ul>
+
+<p>
+<i><b>Obviously</b>: If you don't have emacs installed and configured you will not be able to execute here the code above, so you may want to visit next section.</i>
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org5b67eeb" class="outline-2">
-<h2 id="org5b67eeb"><span class="section-number-2">3</span> Tools</h2>
+
+<div id="outline-container-orga620f62" class="outline-2">
+<h2 id="orga620f62"><span class="section-number-2">3</span> Tools</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org5e5de88" class="outline-3">
-<h3 id="org5e5de88"><span class="section-number-3">3.1</span> Main tool EMACS, flavored</h3>
+<div id="outline-container-orgc2120a0" class="outline-3">
+<h3 id="orgc2120a0"><span class="section-number-3">3.1</span> EMACS</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
-The main tool (a part from git :) for taking the most of this document is EMACS, you want to have it installed.
+The main tool (a part from git :) for taking the most of this
+document is EMACS, you want to have it installed.
 </p>
 
 <ul class="org-ul">
@@ -278,34 +311,43 @@ The main tool (a part from git :) for taking the most of this document is EMACS,
 </ul>
 
 <p>
-I&rsquo;m using EMACS since 2017 for Instant Project Management, TimeSheet management, GTD and other cool stuff like to support this document. Emacs is mainly the key-factor for many features and tricks that I&rsquo;m doing in my everyday workflow stream.
+I'm using EMACS since 2017 for Instant Project Management, TimeSheet
+management, GTD and other cool stuff like to support this
+document. Emacs is mainly the key-factor for many features and tricks
+that I'm doing in my everyday workflow stream.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">sudo</span> apt-get install emacs
+sudo apt-get install emacs
 
 </pre>
 </div>
 
 <p>
-And the flavour that I like most is the <b>spacemacs</b> <a href="https://www.spacemacs.org/">https://www.spacemacs.org/</a>
+And the flavour that I &#x2013;like&#x2013; liked most is the <b>spacemacs</b>
+<a href="https://www.spacemacs.org/">https://www.spacemacs.org/</a>
 </p>
 
 <p>
-The following lines will move your current personal folder from emacs to back-up (just in case), and then will clone the latest stable repository for espacemacs.
+The following lines will move your current personal folder from
+emacs to back-up (just in case), and then will clone the latest
+stable repository for espacemacs.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">mv</span> ~/.emacs.d ~/.emacs.d.old
-<span style="color: #ECBE7B;">git</span> clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+mv ~/.emacs.d ~/.emacs.d.old
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
 </pre>
 </div>
 
 <p>
-With version 25 of EMACS in Ubuntu 18 i found an issue, related to signature update, if you find yourself again with this error you can solve it following the instructions:
+With version 25 (current version is 27 by the time of writing) of
+EMACS in Ubuntu 18 i found an issue, related to signature update,
+if you find yourself again with this error you can solve it
+following the instructions:
 </p>
 
 <p>
@@ -320,7 +362,7 @@ uname -a
 </div>
 
 <p>
-Documentation on &ldquo;signature&rdquo; fails after spacemacs install:
+Documentation on "signature" fails after spacemacs install:
 </p>
 
 <ul class="org-ul">
@@ -328,83 +370,93 @@ Documentation on &ldquo;signature&rdquo; fails after spacemacs install:
 </ul>
 </div>
 
-
-<div id="outline-container-org25f317b" class="outline-5">
-<h5 id="org25f317b">Stored spacemacs configuration</h5>
-<div class="outline-text-5" id="text-org25f317b">
+<div id="outline-container-org718614a" class="outline-5">
+<h5 id="org718614a">My stored spacemacs configuration</h5>
+<div class="outline-text-5" id="text-org718614a">
 <p>
-Here is the most stable configuration on <b>.spacemacs</b> file.
+Here is the most stable configuration on <b>.spacemacs</b> file inside
+the dotfiles folder.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">cp</span> ~/.spacemacs ~/.spacemacs.bk
-<span style="color: #ECBE7B;">cp</span> ./spacemacs/.spacemacs ~/.spacemacs
-
-</pre>
-</div>
-
-<p>
-Configuration for transparency in Emacs:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">
-;; danioche - transparency
-;; --------
-;;<span style="color: #51afef;">(</span>set-frame-parameter <span style="color: #c678dd;">(</span>selected-frame<span style="color: #c678dd;">)</span> <span style="color: #98be65;">'alpha '</span><span style="color: #c678dd;">(</span>&lt;active&gt; . &lt;inactive&gt;<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
-;;<span style="color: #51afef;">(</span>set-frame-parameter <span style="color: #c678dd;">(</span>selected-frame<span style="color: #c678dd;">)</span> <span style="color: #98be65;">'alpha &lt;both&gt;)</span>
-<span style="color: #98be65;"> (set-frame-parameter (selected-frame) '</span>alpha <span style="color: #98be65;">'(95 . 80))</span>
-<span style="color: #98be65;"> (add-to-list '</span>default-frame-alist <span style="color: #98be65;">'(alpha . (95 . 80)))</span>
+cp ~/.spacemacs ~/.spacemacs.bk
+cp ./dotfiles/spacemacs/.spacemacs ~/.spacemacs
 
 </pre>
 </div>
 </div>
 
 <ul class="org-ul">
-<li><a id="org32e3d21"></a><span class="todo TODO">TODO</span> Move spacemacs configuration to dotfile folder<br /></li>
+<li><a id="org653ff18"></a><span class="done DONE">DONE</span> Move spacemacs configuration to dotfile folder<br />
+<div class="outline-text-6" id="text-org653ff18">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-05-30 dom&gt; </span></span> Fixed. In fact I was using dotfile folder for
+storing .emacs
+</p>
+</div>
+</li>
 </ul>
 </div>
 
-<div id="outline-container-orgbde9369" class="outline-4">
-<h4 id="orgbde9369"><span class="section-number-4">3.1.1</span> DOOM EMACS</h4>
+
+<div id="outline-container-orgfdd1869" class="outline-4">
+<h4 id="orgfdd1869"><span class="section-number-4">3.1.1</span> DOOM EMACS</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
-I&rsquo;m trying new things, after getting bored of watching DOOM Emacs videos, I just tought&#x2026; let&rsquo;s try it!
+I'm trying new things, after getting bored of watching DOOM Emacs videos, I just tought&#x2026; let's try it!
 </p>
 
 <p>
 Starting at: <span class="timestamp-wrapper"><span class="timestamp">&lt;2020-12-18 vie&gt; </span></span> &#x2026; we will see&#x2026;
 </p>
 
+
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">git</span> clone --depth <span style="color: #da8548; font-weight: bold;">1</span> https://github.com/hlissner/doom-emacs ~/.emacs.d
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
 
 </pre>
 </div>
-</div>
-</div>
-</div>
-<div id="outline-container-org1b43254" class="outline-3">
-<h3 id="org1b43254"><span class="section-number-3">3.2</span> System</h3>
-<div class="outline-text-3" id="text-3-2">
+
 <p>
-This section is in which i recommend some system tools if not installed.
+After several months using it I found Doom Emacs too big for my use, I
+mainly use: ORG, HUGO and some few things, so I preferred to have more
+minimalistic configuration.
 </p>
 </div>
+</div>
 
-<div id="outline-container-org7b93d07" class="outline-4">
-<h4 id="org7b93d07"><span class="section-number-4">3.2.1</span> HTop</h4>
-<div class="outline-text-4" id="text-3-2-1">
+<div id="outline-container-orged55b99" class="outline-4">
+<h4 id="orged55b99"><span class="section-number-4">3.1.2</span> EMACS my own Config</h4>
+<div class="outline-text-4" id="text-3-1-2">
 <p>
-Mostly (AFAIK) top should be included, but htop is more powerfull and fancy from terminal
+Finally I found myself wanted something less bloated, more
+light. May be I will lose some functionallities but at least I
+will configure the ones that I use.
+</p>
+
+<p>
+At this moment I'm just configuring .emacs file, not dotorg
+config, for now&#x2026;
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">sudo</span> dnf install htop
+mv -v ~/.emacs ~/.emacs.bk
+cp -v ./dotfiles/.emacs ~/.emacs
+
+</pre>
+</div>
+
+<p>
+This config uses some "art" 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+cp -vr ./art ~/Imágenes/art 
 
 </pre>
 </div>
@@ -412,16 +464,90 @@ Mostly (AFAIK) top should be included, but htop is more powerfull and fancy from
 </div>
 </div>
 
-<div id="outline-container-org547d458" class="outline-3">
-<h3 id="org547d458"><span class="section-number-3">3.3</span> GIMP</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-orge4dc593" class="outline-3">
+<h3 id="orge4dc593"><span class="section-number-3">3.2</span> GIMP</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 The graphical editor!
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">sudo</span> apt-get install gimp
+sudo apt-get install gimp
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5acb874" class="outline-3">
+<h3 id="org5acb874"><span class="section-number-3">3.3</span> DotNet check</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+This is a diff tool to check if the current configuration on your
+systems is updated with the stored configuration on this project.
+</p>
+
+<p>
+Based on post: <a href="https://www.shellhacks.com/create-patch-diff-command-linux/">https://www.shellhacks.com/create-patch-diff-command-linux/</a>
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-sh" id="org6b597eb">
+# checking .xmonad dir
+diff  -ruN ~/my-linux-setup/dotfiles/.xmonad ~/.xmonad &gt; patch.xmonad
+cat patch.xmonad | wc -l
+
+</pre>
+</div>
+
+<pre class="example">
+5528
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org540537b" class="outline-2">
+<h2 id="org540537b"><span class="section-number-2">4</span> Terminal</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org8a0cfbb" class="outline-3">
+<h3 id="org8a0cfbb"><span class="section-number-3">4.1</span> system</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+This section is in which i recommend some system tools if not installed.
+</p>
+</div>
+<div id="outline-container-orgf9c177c" class="outline-4">
+<h4 id="orgf9c177c"><span class="section-number-4">4.1.1</span> HTop&#xa0;&#xa0;&#xa0;<span class="tag"><span class="system">system</span>&#xa0;<span class="monitoring">monitoring</span></span></h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+Mostly (AFAIK) top should be included, but htop is more powerfull
+and fancy from terminal
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+sudo dnf install htop
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgadf4722" class="outline-4">
+<h4 id="orgadf4722"><span class="section-number-4">4.1.2</span> Bashtop&#xa0;&#xa0;&#xa0;<span class="tag"><span class="system">system</span>&#xa0;<span class="monitoring">monitoring</span></span></h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+Very nice application to be installed, all the linux youtubers use
+it, so you should so, shouldn't? B)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+sudo dnf install bashtop 
 
 </pre>
 </div>
@@ -429,20 +555,21 @@ The graphical editor!
 </div>
 </div>
 
-<div id="outline-container-orgaaa39d7" class="outline-2">
-<h2 id="orgaaa39d7"><span class="section-number-2">4</span> Terminal</h2>
-<div class="outline-text-2" id="text-4">
-</div>
-<div id="outline-container-orgcb41282" class="outline-3">
-<h3 id="orgcb41282"><span class="section-number-3">4.1</span> Powerline</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-orge23c443" class="outline-3">
+<h3 id="orge23c443"><span class="section-number-3">4.2</span> Powerline</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
-Powerline is a very usefull aplication when you use git, I recommend to install it. More info at: 
+Powerline is a very usefull aplication when you use git, I
+recommend to install it. More info at:
+</p>
+
+<p>
+For ubuntu
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">sudo</span> apt-get install fonts-powerline powerline
+sudo apt-get install fonts-powerline powerline
 
 </pre>
 </div>
@@ -450,15 +577,18 @@ Powerline is a very usefull aplication when you use git, I recommend to install 
 <p>
 For DNF package manager
 </p>
+
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">sudo</span> dnf install powerline
+sudo dnf install powerline
 
 </pre>
 </div>
 
 <p>
-After installation you should include into your .bashrc the initialization of the powerline, for doing this first check your installation path
+After installation you should include into your .bashrc the
+initialization of the powerline, for doing this first check your
+installation path
 </p>
 
 <div class="org-src-container">
@@ -474,7 +604,7 @@ You should have a script to be included on your .bashrc:
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">ls</span> -l /usr/share/powerline/bash/powerline.sh
+ls -l /usr/share/powerline/bash/powerline.sh
 
 </pre>
 </div>
@@ -485,14 +615,14 @@ If th above is working then you can addit executing the following code:
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">cp</span> ~/.bashrc ~/.bashrc.bk
-<span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">"# Powerline"</span> &gt;&gt; ~/.bashrc
-<span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">"export PATH=</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">PATH</span><span style="color: #98be65;">:</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">HOME</span><span style="color: #98be65;">/Library/Python/2.7/bin"</span> &gt;&gt; ~/.bashrc
-<span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">"powerline-daemon -q"</span> &gt;&gt; ~/.bashrc
-<span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">"POWERLINE_BASH_CONTINUATION=1"</span> &gt;&gt;  ~/.bashrc
-<span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">"POWERLINE_BASH_SELECT=1"</span> &gt;&gt; ~/.bashrc
-<span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">". /usr/share/powerline/bash/powerline.sh"</span> &gt;&gt; ~/.bashrc
-<span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">"Done! :)"</span>
+cp ~/.bashrc ~/.bashrc.bk
+echo "# Powerline" &gt;&gt; ~/.bashrc
+echo "export PATH=$PATH:$HOME/Library/Python/2.7/bin" &gt;&gt; ~/.bashrc
+echo "powerline-daemon -q" &gt;&gt; ~/.bashrc
+echo "POWERLINE_BASH_CONTINUATION=1" &gt;&gt;  ~/.bashrc
+echo "POWERLINE_BASH_SELECT=1" &gt;&gt; ~/.bashrc
+echo ". /usr/share/powerline/bash/powerline.sh" &gt;&gt; ~/.bashrc
+echo "Done! :)"
 
 </pre>
 </div>
@@ -515,14 +645,15 @@ I added in the repo my config file for this (very standard BTW).
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">cp</span> /usr/share/powerline/config_files/config.json ./config.json.bk
-<span style="color: #ECBE7B;">cp</span> ./powerline-conf/config.json /usr/share/powerline/config_files/
+cp /usr/share/powerline/config_files/config.json ./config.json.bk
+cp ./powerline-conf/config.json /usr/share/powerline/config_files/
 
 </pre>
 </div>
 
 <p>
-You will need to open a new terminal after changing the <b>config.json</b> file.
+You will need to open a new terminal after changing the
+<b>config.json</b> file.
 </p>
 
 <p>
@@ -530,16 +661,21 @@ More info: <a href="https://devpro.media/install-powerline-ubuntu/#edit-your-pow
 </p>
 </div>
 
-<div id="outline-container-org1017d31" class="outline-4">
-<h4 id="org1017d31"><span class="section-number-4">4.1.1</span> <span class="todo TODO">TODO</span> To improve colors in powerline-git config to show changes on directory are pending</h4>
+<div id="outline-container-orgae5b422" class="outline-4">
+<h4 id="orgae5b422"><span class="section-number-4">4.2.1</span> <span class="todo TODO">TODO</span> To improve colors in powerline-git config to show changes on directory are pending</h4>
 </div>
 </div>
 
-<div id="outline-container-orgc9cbd21" class="outline-3">
-<h3 id="orgc9cbd21"><span class="section-number-3">4.2</span> Some fun</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org2daae02" class="outline-3">
+<h3 id="org2daae02"><span class="section-number-3">4.3</span> Some fun</h3>
+<div class="outline-text-3" id="text-4-3">
+</div>
+<div id="outline-container-orga0f683d" class="outline-4">
+<h4 id="orga0f683d"><span class="section-number-4">4.3.1</span> Pokemon on your terminal</h4>
+<div class="outline-text-4" id="text-4-3-1">
 <p>
-I love the pokemon say addon for terminal, is a litle bit of fun on your term:
+I love the pokemon say addon for terminal, is a litle bit of fun on
+your term:
 </p>
 
 <ul class="org-ul">
@@ -548,7 +684,7 @@ I love the pokemon say addon for terminal, is a litle bit of fun on your term:
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">sudo</span> apt-get install fortune cowsay
+sudo apt-get install fortune cowsay
 
 </pre>
 </div>
@@ -559,8 +695,8 @@ For Fedora, there is an slight difference
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">sudo</span> dnf install fortune-mod
-<span style="color: #ECBE7B;">sudo</span> dnf install cowsay
+sudo dnf install fortune-mod
+sudo dnf install cowsay
 
 </pre>
 </div>
@@ -578,9 +714,9 @@ fortune | cowsay
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">cd</span> ~/
-<span style="color: #ECBE7B;">git</span> clone http://github.com/possatti/pokemonsay
-<span style="color: #ECBE7B;">cd</span> pokemonsay
+cd ~/
+git clone http://github.com/possatti/pokemonsay
+cd pokemonsay
 ./install.sh
 
 </pre>
@@ -592,9 +728,9 @@ Now you want to add it to your .bashrc file to get some cool wellcome everytime 
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">cp</span> ~/.bashrc ~/.bashrc.before.pokesay
-<span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">"# Pokemon say add-on"</span>
-<span style="color: #ECBE7B;">echo</span> <span style="color: #98be65;">"fortune | ~/bin/pokemonsay "</span> &gt;&gt; ~/.bashrc
+cp ~/.bashrc ~/.bashrc.before.pokesay
+echo "# Pokemon say add-on" &gt;&gt; ~/.bashrc
+echo "fortune | ~/bin/pokemonsay " &gt;&gt; ~/.bashrc
 diff ~/.bashrc ~/.bashrc.before.pokesay
 
 </pre>
@@ -602,18 +738,163 @@ diff ~/.bashrc ~/.bashrc.before.pokesay
 </div>
 </div>
 
-<div id="outline-container-org3a37840" class="outline-3">
-<h3 id="org3a37840"><span class="section-number-3">4.3</span> Fonts</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-org1324b40" class="outline-4">
+<h4 id="org1324b40"><span class="section-number-4">4.3.2</span> Ascii art</h4>
+<div class="outline-text-4" id="text-4-3-2">
+<p>
+Sometimes is nice to beutify your terminal with some ascii art.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+sudo dnf install figlet
+
+</pre>
+</div>
+
+<p>
+You can test it!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+fig hello
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbed10ef" class="outline-3">
+<h3 id="orgbed10ef"><span class="section-number-3">4.4</span> Weather info</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+I like sailing and weather conditions are something to look at,
+I've tested several programs on terminal that I found useful, here are.
+</p>
+</div>
+
+<div id="outline-container-orgab1ce9f" class="outline-4">
+<h4 id="orgab1ce9f"><span class="section-number-4">4.4.1</span> Using inxi</h4>
+<div class="outline-text-4" id="text-4-4-1">
+<p>
+Inxi is a Command line system information for console and IRC,
+this allows you to have many information about the system and also
+Weather information, visit it's manual page. 
+</p>
+
+<p>
+This is not an standard tool so you will need to install it using
+your package manager.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">
+inxi -W Alicante,Spain
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd394383" class="outline-4">
+<h4 id="orgd394383"><span class="section-number-4">4.4.2</span> Using wttr.in</h4>
+<div class="outline-text-4" id="text-4-4-2">
+<p>
+Having <b>curl</b> installed in your system this is a good tool with
+propper information and lightweight due the fact that is not needed
+any installation.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+curl wttr.in/LEAL?lang=es 
+
+</pre>
+</div>
+
+<p>
+It's complete information but at the same time is way too much if
+you just want the minimum information.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4ad9818" class="outline-4">
+<h4 id="org4ad9818"><span class="section-number-4">4.4.3</span> Using OpenWeatherMap API</h4>
+<div class="outline-text-4" id="text-4-4-3">
+<p>
+One solution is made it yourself by using the OpenWeatherMap API,
+you can register (I did, no confirmation link sent me back&#x2026;)
+</p>
+
+<p>
+Once I will get the confirmation link maybe I could use this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+curl api.openweathermap.org/data/2.5/weather?q=Alicante&amp;appid=
+
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5de1caa" class="outline-4">
+<h4 id="org5de1caa"><span class="section-number-4">4.4.4</span> Using weather-util</h4>
+<div class="outline-text-4" id="text-4-4-4">
+<p>
+Nice utility from one-developer, nice to read the README of this
+tool, the "Why" section is heart-warmming. Love is the answer.
+</p>
+
+<p>
+You should visit and download the latest tar at 
+&gt; <a href="http://fungi.yuggoth.org/weather/src/">http://fungi.yuggoth.org/weather/src/</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+weather -a LEAL 
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc1b05ab" class="outline-4">
+<h4 id="orgc1b05ab"><span class="section-number-4">4.4.5</span> Using Puertos del Estado</h4>
+<div class="outline-text-4" id="text-4-4-5">
+<p>
+For maritime forecast in Spain I use Puertos del Estado web page
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+curl -X POST -d 'point=2079100&amp;name=Alicante' https://bancodatos.puertos.es/TablaAccesoSimplificado/util/get_wanadata.php | html2text
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3cb440f" class="outline-3">
+<h3 id="org3cb440f"><span class="section-number-3">4.5</span> Fonts</h3>
+<div class="outline-text-3" id="text-4-5">
 <p>
 Source Code Pro is the default font for Emacs, and also is a nice font. Here is how to install it.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">git</span> clone https://github.com/adobe-fonts/source-code-pro.git ./source-code-pro
-<span style="color: #ECBE7B;">mkdir</span> ~/.fonts
-<span style="color: #ECBE7B;">cp</span> ./source-code-pro/OTF/*.otf ~/.fonts/
+git clone https://github.com/adobe-fonts/source-code-pro.git ./source-code-pro
+mkdir ~/.fonts
+cp ./source-code-pro/OTF/*.otf ~/.fonts/
 fc-cache -f -v
 
 </pre>
@@ -622,15 +903,16 @@ fc-cache -f -v
 </div>
 </div>
 
-<div id="outline-container-org8036576" class="outline-2">
-<h2 id="org8036576"><span class="section-number-2">5</span> Productivity</h2>
+<div id="outline-container-org6c996de" class="outline-2">
+<h2 id="org6c996de"><span class="section-number-2">5</span> Productivity</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgc8bc256" class="outline-3">
-<h3 id="orgc8bc256"><span class="section-number-3">5.1</span> Code snipets</h3>
+<div id="outline-container-org56798ed" class="outline-3">
+<h3 id="org56798ed"><span class="section-number-3">5.1</span> Code snipets</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
-This is very useful, you can use skeleton (code in lisp) or you can use a module called <b>yasnippet</b>, well documented here:
+This is very useful, you can use skeleton (code in lisp) or you can
+use a module called <b>yasnippet</b>, well documented here:
 </p>
 
 <ul class="org-ul">
@@ -638,20 +920,22 @@ This is very useful, you can use skeleton (code in lisp) or you can use a module
 </ul>
 
 <p>
-For seleton you can use a configuration layer in spacemacs and code your own skeleton in elisp, I made this way some skeleton for IPM porpuses.
+For seleton you can use a configuration layer in spacemacs and code
+your own skeleton in elisp, I made this way some skeleton for IPM
+porpuses.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6292512" class="outline-3">
-<h3 id="org6292512"><span class="section-number-3">5.2</span> Music</h3>
+<div id="outline-container-orgbf4ff4c" class="outline-3">
+<h3 id="orgbf4ff4c"><span class="section-number-3">5.2</span> Music</h3>
 <div class="outline-text-3" id="text-5-2">
 </div>
-<div id="outline-container-org2d3b589" class="outline-4">
-<h4 id="org2d3b589"><span class="section-number-4">5.2.1</span> Lazy Option: Spotify</h4>
+<div id="outline-container-org0bd2797" class="outline-4">
+<h4 id="org0bd2797"><span class="section-number-4">5.2.1</span> Lazy Option: Spotify</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <p>
-Spotify, it&rsquo;s a crap. I&rsquo;m looking for replacement, but for now&#x2026;
+Spotify, it's a crap. I'm looking for replacement, but for now&#x2026;
 </p>
 
 <div class="org-src-container">
@@ -662,14 +946,22 @@ snap install spotify
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-orgbd42b0b" class="outline-3">
-<h3 id="orgbd42b0b"><span class="section-number-3">5.3</span> Presentations</h3>
+<div id="outline-container-org77eec28" class="outline-4">
+<h4 id="org77eec28"><span class="section-number-4">5.2.2</span> Improvements and to-do's <code>[0/1]</code></h4>
+<div class="outline-text-4" id="text-5-2-2">
+</div>
+<div id="outline-container-org0cd3fe2" class="outline-5">
+<h5 id="org0cd3fe2"><span class="todo TODO">TODO</span> Music from console</h5>
+</div>
+</div>
+</div>
+<div id="outline-container-org2b87516" class="outline-3">
+<h3 id="org2b87516"><span class="section-number-3">5.3</span> Presentations</h3>
 <div class="outline-text-3" id="text-5-3">
 </div>
-<div id="outline-container-org7894435" class="outline-4">
-<h4 id="org7894435"><span class="section-number-4">5.3.1</span> reveal-js for Spaceemacs configuration</h4>
+<div id="outline-container-orge9cca63" class="outline-4">
+<h4 id="orge9cca63"><span class="section-number-4">5.3.1</span> reveal-js for Spaceemacs configuration</h4>
 <div class="outline-text-4" id="text-5-3-1">
 <p>
 A part from LibreOffice suite you may want to have a powerfull tool for presentation. 
@@ -677,10 +969,10 @@ This is for sure reveal.js, you can include it in your org configuration adding 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">     org
-     (org <span style="color: #c678dd;">:variables</span>
-          org-enable-github-support t
-          org-enable-reveal-js-support t)
+<pre class="src src-lisp">org
+(org :variables
+     org-enable-github-support t
+     org-enable-reveal-js-support t)
 </pre>
 </div>
 
@@ -692,63 +984,112 @@ This configuration is included in the <b>.spacemacs</b> file.
 </div>
 </div>
 
-<div id="outline-container-org7286756" class="outline-2">
-<h2 id="org7286756"><span class="section-number-2">6</span> Destkop</h2>
+<div id="outline-container-org7220a7a" class="outline-2">
+<h2 id="org7220a7a"><span class="section-number-2">6</span> Blogging</h2>
 <div class="outline-text-2" id="text-6">
-</div>
-<div id="outline-container-orgc9f9d01" class="outline-3">
-<h3 id="orgc9f9d01"><span class="section-number-3">6.1</span> GDM - Fedora login screen background</h3>
-<div class="outline-text-3" id="text-6-1">
 <p>
-This should be easy but isn&rsquo;t&#x2026; something quite simple like changing the user&rsquo;s login background it is a little big triky.
+In this section I will document the use of Hugo and how I adopted
+org-mode with Hugo static web generation.
 </p>
 
 <p>
-For being able to modify the Gnome Desktop Manager login screen background you will need to download an specific application.
-</p>
-
-<p>
-Here is what I found in <a href="https://copr.fedorainfracloud.org/coprs/zirix/gdm-wallpaper/">https://copr.fedorainfracloud.org/coprs/zirix/gdm-wallpaper/</a>
+Firts of all we need to install Hugo, in Fedora
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-dnf copr enable zirix/gdm-wallpaper
-dnf install gdm-wallpaper
-set-gdm-wallpaper /path/to/image.png
+sudo dnf install hugo
 
 </pre>
 </div>
 
 <p>
-And works! I disabled the repository added just in case once is installed.
-</p>
-</div>
-</div>
-
-<div id="outline-container-orga073f1d" class="outline-3">
-<h3 id="orga073f1d"><span class="section-number-3">6.2</span> i3 tiling windows manager</h3>
-<div class="outline-text-3" id="text-6-2">
-<p>
-I&rsquo;m just trying this, for me is good to have more focus on the work, avoiding disrruption and because of this I&rsquo;m trying i3.
+This is the template that I used as the base for my new blog:
+Anatole Template <a href="https://themes.gohugo.io/anatole/">https://themes.gohugo.io/anatole/</a>
 </p>
 
 <p>
-I tricked some battery problems with the i3status bar, there is a .conf file in this repo that you can use:
+Adding the template to the current project
+</p>
+
+<p>
+I documented the process of the installation and configuration using
+Hugo as static generation in combination with Org-mode.
+</p>
+
+<p>
+Find the post here:
+</p>
+<ul class="org-ul">
+<li><a href="https://danioche.github.io/blog">https://danioche.github.io/blog</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgedde110" class="outline-2">
+<h2 id="orgedde110"><span class="section-number-2">7</span> Destkop Customization</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-orgc7db448" class="outline-3">
+<h3 id="orgc7db448"><span class="section-number-3">7.1</span> GDM - Fedora login screen background</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+This should be easy but isn't&#x2026; something quite simple like
+changing the user's login background it is a little big triky.
+</p>
+
+<p>
+For being able to modify the Gnome Desktop Manager login screen
+background you will need to download an specific application.
+</p>
+
+<p>
+Here is what I found in
+<a href="https://copr.fedorainfracloud.org/coprs/zirix/gdm-wallpaper/">https://copr.fedorainfracloud.org/coprs/zirix/gdm-wallpaper/</a>
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">cp</span> ./i3/.i3status.conf ~/
+sudo dnf copr enable zirix/gdm-wallpaper
+sudo dnf install gdm-wallpaper
+sudo set-gdm-wallpaper /path/to/image.png
 
 </pre>
 </div>
 
 <p>
-Documentation can be found here: <a href="https://i3wm.org/docs/userguide.html#_default_keybindings">https://i3wm.org/docs/userguide.html#_default_keybindings</a>
+And works! I disabled the repository added just in case once is
+installed.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7bbe94d" class="outline-3">
+<h3 id="org7bbe94d"><span class="section-number-3">7.2</span> i3 tiling windows manager</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+I'm just trying this, for me is good to have more focus on the
+work, avoiding disrruption and because of this I'm trying i3.
 </p>
 
-<pre class="example" id="org76152c0">
+<p>
+I tricked some battery problems with the i3status bar, there is a
+.conf file in this repo that you can use:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">
+cp ./i3/.i3status.conf ~/
+
+</pre>
+</div>
+
+<p>
+Documentation can be found here:
+<a href="https://i3wm.org/docs/userguide.html#_default_keybindings">https://i3wm.org/docs/userguide.html#_default_keybindings</a>
+</p>
+
+<pre class="example" id="org91a3031">
 
 ln -s /sys/class/power_supply/axp288_fuel_gauge/ BAT1
 
@@ -756,11 +1097,13 @@ ln -s /sys/class/power_supply/axp288_fuel_gauge/ BAT1
 </div>
 </div>
 
-<div id="outline-container-org7840750" class="outline-3">
-<h3 id="org7840750"><span class="section-number-3">6.3</span> xmonad tiling windows manager</h3>
-<div class="outline-text-3" id="text-6-3">
+<div id="outline-container-org6e409dc" class="outline-3">
+<h3 id="org6e409dc"><span class="section-number-3">7.3</span> xmonad tiling windows manager</h3>
+<div class="outline-text-3" id="text-7-3">
 <p>
-I&rsquo;ve tried Xmonad and has that minimilistic touch that I love, so this is an option to take into consideration, heres is how to install.
+I've tried Xmonad and has that minimilistic touch that I love, so
+this is an option to take into consideration, heres is how to
+install.
 </p>
 
 <p>
@@ -769,30 +1112,31 @@ The following is for install For Fedora:
 
 <div class="org-src-container">
 <pre class="src src-sh">
- <span style="color: #ECBE7B;">sudo</span> dnf install xmonad
+sudo dnf install xmonad
 
 </pre>
 </div>
 
 <p>
-I use xmobar with xmonad, so let&rsquo;s install it:
+I use xmobar with xmonad, so let's install it:
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
- <span style="color: #ECBE7B;">sudo</span> dnf install xmobar
+sudo dnf install xmobar
 
 </pre>
 </div>
 
 <p>
-For easy the configuration you have .xmonad and .xmobarrc inside <b>dotfiles</b>
+For easy the configuration you have .xmonad and .xmobarrc inside
+<b>dotfiles</b>
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #c678dd;">printf</span> <span style="color: #98be65;">"Check config and other scripts used by Xmonad and Xmobar:\n\n"</span>
-<span style="color: #ECBE7B;">ls</span> -l dotfiles/.xmo*
+printf "Check config and other scripts used by Xmonad and Xmobar:\n\n"
+ls -l dotfiles/.xmo*
 
 </pre>
 </div>
@@ -803,7 +1147,7 @@ Here is the configuration for xmobar
 
 <div class="org-src-container">
 <pre class="src src-sh">
-<span style="color: #ECBE7B;">cat</span> dotfiles/.xmobarrc
+cat dotfiles/.xmobarrc
 
 </pre>
 </div>
@@ -812,9 +1156,10 @@ Here is the configuration for xmobar
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2020-05-25 lun 00:00</p>
+<p class="date">Date: 2020-06-05 vie 00:00</p>
 <p class="author">Author: @danioche</p>
-<p class="date">Created: 2021-03-06 sáb 00:48</p>
+<p class="date">Created: 2021-12-29 mié 12:00</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
