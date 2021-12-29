@@ -78,16 +78,16 @@
 I try to avoid bloated linux distros, but the most recent distros comes with at least ~ 15Gb, and, really, is quite a lot for a linux system.
 I love minimal installations ( I still remember the installations of Slackware that I made in my beloved Compaq Armada with 1Gb W95 + Slackware, nice uh? ).
 
-** Improvements
-
+** Improvements [2/3]
    In this section I will record some taks and TODOs for future versions
-
 *** DONE <2021-01-17 dom> Export configuration
 
     Configuration using gongzhintaao CSS that is enough for now, maybe we
     could add future improvements.
 
-*** TODO Backup section
+*** DONE Backup Tools
+     - <2021-12-29 mié> New code blocks on [[Tools][Tools section]] to patch
+       configurations from current user to this project and viceversa.
 *** TODO Auto-install scripts
 
 * This project
@@ -285,120 +285,162 @@ I love minimal installations ( I still remember the installations of Slackware t
 
    #+end_src
 
-** Dotfiles directories check
+** Dotfiles directories tools: Check, Patch/Backup, Restore
 
-   This is a diff tool to check if the current configuration on your
-   systems is updated with the stored configuration on this project.
+   This is a /"diff"/ tool to check if the current configuration on your
+   system is updated with the stored configuration on this project.
 
-   Based on post: https://www.shellhacks.com/create-patch-diff-command-linux/
+   *some credits* 
+   Diff and Patch commands are based on this post:
+   https://www.shellhacks.com/create-patch-diff-command-linux/
 
-   #+name: OverallChecks 
+   The stuff:
+   
+   #+name: mainChecks 
    #+begin_src sh :results output
 
-     echo "Project configuration on dotfiles:"
+     echo "Checking local Xmonad config vs. this project config: "
+     diff -rN --brief ./dotfiles/xmonad/.xmonad/ ~/.xmonad > checks.xmonad
+     changes=`cat checks.xmonad | wc -l`
+     echo ">>>Found $changes differences for Xmonad"
 
-     ls -laR ./dotfiles/ 
-     echo " "
-     echo "Checking local Xmonad config vs. Danioche's config: "
-     diff -rN --brief ./dotfiles/.xmonad/ ~/.xmonad > checks.xmonad
-     cat checks.xmonad
+     echo "Checking local Emacs config vs. this project config: "
+     diff --brief ./dotfiles/emacs/.emacs ~/.emacs > checks.emacs
+     changes=`cat checks.emacs | wc -l`
+     echo ">>>Found $changes differences for .emacs"
 
+     echo "Checking local Xmobar config vs. this project config: "
+     diff --brief ./dotfiles/xmobar/.xmobarrc ~/.xmobarrc > checks.xmobarrc
+     changes=`cat checks.xmobarrc | wc -l`
+     echo ">>>Found $changes differences for .xmobarrc"
 
 
    #+end_src  
+   #+RESULTS: mainChecks
+   : Checking local Xmonad config vs. this project config: 
+   : >>>Found 14 differences for Xmonad
+   : Checking local Emacs config vs. this project config: 
+   : >>>Found 0 differences for .emacs
+   : Checking local Xmobar config vs. this project config: 
+   : >>>Found 0 differences for .xmobarrc
 
-   #+RESULTS: OverallChecks
-   #+begin_example
-   Project configuration on dotfiles:
-   ./dotfiles/:
-   total 0
-   drwxrwxr-x. 1 danioche danioche  68 dic 29 12:20 .
-   drwxrwxr-x. 1 danioche danioche 418 dic 29 12:54 ..
-   drwxrwxr-x. 1 danioche danioche  12 dic 29 12:18 emacs
-   drwxrwxr-x. 1 danioche danioche  20 may 23  2021 spacemacs
-   drwxrwxr-x. 1 danioche danioche  50 dic 29 12:20 xmobar
-   drwxrwxr-x. 1 danioche danioche  14 dic 29 12:18 xmonad
-   drwxrwxr-x. 1 danioche danioche  18 dic 29 12:20 xsession
-
-   ./dotfiles/emacs:
-   total 12
-   drwxrwxr-x. 1 danioche danioche   12 dic 29 12:18 .
-   drwxrwxr-x. 1 danioche danioche   68 dic 29 12:20 ..
-   -rw-rw-r--. 1 danioche danioche 9121 dic 29 12:18 .emacs
-
-   ./dotfiles/spacemacs:
-   total 20
-   drwxrwxr-x. 1 danioche danioche    20 may 23  2021 .
-   drwxrwxr-x. 1 danioche danioche    68 dic 29 12:20 ..
-   -rw-rw-r--. 1 danioche danioche 19412 may 23  2021 .spacemacs
-
-   ./dotfiles/xmobar:
-   total 8
-   drwxrwxr-x. 1 danioche danioche  50 dic 29 12:20 .
-   drwxrwxr-x. 1 danioche danioche  68 dic 29 12:20 ..
-   -rw-rw-r--. 1 danioche danioche 929 dic 29 12:20 .xmobarrc
-   -rw-r--r--. 1 danioche danioche 351 dic 29 12:20 .xmobarrcWeather
-
-   ./dotfiles/xmonad:
-   total 0
-   drwxrwxr-x. 1 danioche danioche  14 dic 29 12:18 .
-   drwxrwxr-x. 1 danioche danioche  68 dic 29 12:20 ..
-   drwxrwxr-x. 1 danioche danioche 232 dic 29 12:18 .xmonad
-
-   ./dotfiles/xmonad/.xmonad:
-   total 44
-   drwxrwxr-x. 1 danioche danioche   232 dic 29 12:18 .
-   drwxrwxr-x. 1 danioche danioche    14 dic 29 12:18 ..
-   -rwxrwxr-x. 1 danioche danioche  1189 dic 29 12:18 get-Battery.sh
-   -rwxrwxr-x. 1 danioche danioche   267 dic 29 12:18 get-Volume.sh
-   -rw-rw-r--. 1 danioche danioche  2040 dic 29 12:18 get-Weather.history
-   -rw-r--r--. 1 danioche danioche    52 dic 29 12:18 get-Weather.log
-   -rwxrwxr-x. 1 danioche danioche  2500 dic 29 12:18 get-Weather.sh
-   -rwxrwxr-x. 1 danioche danioche  1686 dic 29 12:18 get-Weather.sh~
-   -rwxrwxr-x. 1 danioche danioche   318 dic 29 12:18 set-Brightness.sh
-   -rwxrwxr-x. 1 danioche danioche 12638 dic 29 12:18 xmonad.hs
-
-   ./dotfiles/xsession:
-   total 4
-   drwxrwxr-x. 1 danioche danioche  18 dic 29 12:20 .
-   drwxrwxr-x. 1 danioche danioche  68 dic 29 12:20 ..
-   -rwxrwxr-x. 1 danioche danioche 189 dic 29 12:20 .xsession
-
-   Checking local Xmonad config vs. Danioche's config: 
-   Los ficheros ./dotfiles/.xmonad/get-Battery.sh y /home/danioche/.xmonad/get-Battery.sh son distintos
-   Los ficheros ./dotfiles/.xmonad/get-Vol.sh y /home/danioche/.xmonad/get-Vol.sh son distintos
-   Los ficheros ./dotfiles/.xmonad/get-Volume.sh y /home/danioche/.xmonad/get-Volume.sh son distintos
-   Los ficheros ./dotfiles/.xmonad/get-Weather.history y /home/danioche/.xmonad/get-Weather.history son distintos
-   Los ficheros ./dotfiles/.xmonad/get-Weather.log y /home/danioche/.xmonad/get-Weather.log son distintos
-   Los ficheros ./dotfiles/.xmonad/get-Weather.sh y /home/danioche/.xmonad/get-Weather.sh son distintos
-   Los ficheros ./dotfiles/.xmonad/get-Weather.sh~ y /home/danioche/.xmonad/get-Weather.sh~ son distintos
-   Los ficheros ./dotfiles/.xmonad/icons.all y /home/danioche/.xmonad/icons.all son distintos
-   Los ficheros ./dotfiles/.xmonad/sailing-conditions.info y /home/danioche/.xmonad/sailing-conditions.info son distintos
-   Los ficheros ./dotfiles/.xmonad/set-Brightness.sh y /home/danioche/.xmonad/set-Brightness.sh son distintos
-   Los ficheros ./dotfiles/.xmonad/test.wttr y /home/danioche/.xmonad/test.wttr son distintos
-   Los ficheros ./dotfiles/.xmonad/weather-status.info y /home/danioche/.xmonad/weather-status.info son distintos
-   Los ficheros ./dotfiles/.xmonad/xmonad.errors y /home/danioche/.xmonad/xmonad.errors son distintos
-   Los ficheros ./dotfiles/.xmonad/xmonad.hi y /home/danioche/.xmonad/xmonad.hi son distintos
-   Los ficheros ./dotfiles/.xmonad/xmonad.hs y /home/danioche/.xmonad/xmonad.hs son distintos
-   Los ficheros ./dotfiles/.xmonad/xmonad.hs~ y /home/danioche/.xmonad/xmonad.hs~ son distintos
-   Los ficheros ./dotfiles/.xmonad/xmonad.o y /home/danioche/.xmonad/xmonad.o son distintos
-   Los ficheros ./dotfiles/.xmonad/xmonad-x86_64-linux y /home/danioche/.xmonad/xmonad-x86_64-linux son distintos
-   #+end_example
-
-   With the following command you can patch your current xmonad version with the differences.
+   With the following code block will generate patches for *UPDATING
+   this CONFIG stored on this project* with the ones modified on your
+   system, in other words *IT DOES a backup of your dotfiles inside
+   project dotfiles*.
    
    #+NAME: PatchingDirectories
    #+BEGIN_SRC sh :results output
 
-     # checking .xmonad dir
-     diff  -ruN ./dotfiles/.xmonad ~/.xmonad > patch.xmonad
-     cat patch.xmonad | wc -l
+     echo "Building Patches/Backups if needed..."
+     diff  -ruN ./dotfiles/xmonad/.xmonad ~/.xmonad > patch.xmonad
+     patchXmonad=`cat patch.xmonad | wc -l`
+     if [ $patchXmonad -gt 0 ]; then
+	 echo ">>> Patch for Xmonad ready: patch.xmonad " 
+     fi
+
+     diff  -u ./dotfiles/xmobar/.xmobarrc ~/.xmobarrc > patch.xmobarrc
+     patchXmobar=`cat patch.xmobarrc | wc -l`
+     if [ $patchXmobar -gt 0 ]; then
+	 echo ">>> Patch for Xmobarrc ready: patch.xmobarrc " 
+     fi
+
+     diff  -u ./dotfiles/emacs/.emacs ~/.emacs > patch.emacs
+     patchEmacs=`cat patch.emacs | wc -l`
+     if [ $patchEmacs -gt 0 ]; then
+	 echo ">>> Patch for Emacs ready: patch.emacs " 
+     fi
+
+     echo "Fin."
+
+   #+END_SRC
+   #+RESULTS: PatchingDirectories
+   : Building Patches/Backups if needed...
+   : >>> Patch for Xmonad ready: patch.xmonad 
+   : >>> Patch for Xmobarrc ready: patch.xmobarrc 
+   : >>> Patch for Emacs ready: patch.emacs 
+   : Fin.
+
+   With the following code you can *restore your config files* from the ones on this project.
+
+   #+NAME: RestoreDirectories
+   #+BEGIN_SRC sh :results output
+
+     echo "Building Restoring Patches if needed..."
+     diff  -ruN ~/.xmonad ./dotfiles/xmonad/.xmonad > restore.xmonad
+     patchXmonad=`cat backup.xmonad | wc -l`
+     if [ $patchXmonad -gt 0 ]; then
+	 echo ">>> Backup patch for Xmonad ready: restore.xmonad " 
+     fi
+
+     diff  -u ~/.xmobarrc ./dotfiles/xmobar/.xmobarrc > restore.xmobarrc
+     patchXmobar=`cat backup.xmobarrc | wc -l`
+     if [ $patchXmobar -gt 0 ]; then
+	 echo ">>> Backup patch for Xmobarrc ready: restore.xmobarrc " 
+     fi
+
+     diff  -u ~/.emacs ./dotfiles/emacs/.emacs > restore.emacs
+     patchEmacs=`cat backup.emacs | wc -l`
+     if [ $patchEmacs -gt 0 ]; then
+	 echo ">>> Backup patch for Emacs ready: restore.emacs " 
+     fi
+
+     echo "Fin."
 
    #+END_SRC
 
-   #+RESULTS:
-   : 5528
-   
+   #+RESULTS: RestoreDirectories
+   : Building Restoring Patches if needed...
+   : Fin.
+
+   How to apply the Patches.
+
+   Now this will up to you, the following code block is just an
+   example no parametrization has been made because I do not want you
+   blaming this beatiful org file because of your mistake :D.
+
+   This will be the commands:
+
+   #+name: PatchFileSample
+   #+begin_src sh :results output
+
+     # do the patch
+     patch OriginalFile < PatchFile
+     # This will save your xmobarrc file to this project
+     patch dotfiles/xmobar/.xmobarrc < patch.xmobarrc
+     # This will UPDATE your xmobarrc file with the one in this project
+     patch ~/.xmobarrc < restore.xmobarrc
+
+     # undo the patch
+     patch -R OriginalFile < PatchFile
+
+   #+end_src
+
+   #+name: PatchDirSample
+   #+begin_src sh :results output
+
+     #do the patch -- This will apply the changes on the same directory
+     #structure when patch was created
+     patch -p0 < PatchFile
+
+     #undo
+     patch -R -p0 < PatchFile
+
+   #+end_src
+
+   Clean this mess
+
+   #+name: CleanPatches
+   #+begin_src sh :results output
+
+     rm checks.*
+     rm patch.*
+     rm restore.*
+
+   #+end_src 
+
+   #+RESULTS: CleanPatches
+      
 * Terminal
 ** system
    This section is in which i recommend some system tools if not installed.

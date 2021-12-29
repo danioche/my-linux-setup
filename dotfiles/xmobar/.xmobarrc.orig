@@ -1,0 +1,16 @@
+Config { font = "xft:Source Code Pro:size=10,Hack:size=9,Font Awesome:size=9" ,
+       bgColor = "black" , fgColor = "grey" , position = Top ,
+       lowerOnStart = True ,
+       commands = [
+       		Run Network "wlp1s0"
+       		    ["-L","0","-H","15000","--normal","green","--high","red","-S","True","--template","<fc=#04d9ff></fc> <rx>|<tx>"] 10 ,
+		Run MultiCpu
+       		    ["-L","3","-H","50","--normal","green","--high","red","-t","<fc=#04d9ff></fc> <bar>"] 10 ,
+		Run Memory ["-t","<fc=#04d9ff></fc> <usedratio>%"] 10 ,
+		Run Swap ["-t","<fc=#04d9ff>S</fc> <usedratio>%"] 10 ,
+		Run Com "/home/danioche/.xmonad/get-Battery.sh" [] "myBatt" 60,
+		Run Com "/home/danioche/.xmonad/get-Weather.sh" [] "myWeather" 1800,
+       		Run Date "%a %b %_d %Y %H:%M:%S" "date" 10],
+	sepChar= "%" ,
+	alignSep = "}{" ,
+	template = "%multicpu% | %memory% %swap% | %wlp1s0% }<fc=#ee9a00> %date%</fc>{ %myWeather%|%myBatt%" }
