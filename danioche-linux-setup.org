@@ -5,7 +5,7 @@
 #+AUTHOR: @danioche
 #+DATE: <2020-06-05 vie>
 
-* About
+* Why?
   
   This document it's aimed to help to configure *mostly any* /Ubuntu/
   (and recently /Fedora/) distro to working-distro with the most
@@ -45,15 +45,15 @@
   #+begin_example
   Showing last 5 changes on the project:
   -----------------------------------------
+  Update from local
+
+  Patches cleaned-up
+
+  Backup and Restore Tool with diff/patch
+
+  Dotfiles reorg and some patch tools
+
   Weather scripts and Xmobar review, Added bottom bar in Xmonad cfg
-
-  Small changes on format
-
-  Spacemacs config moved to dotfiles and small text improvements
-
-  .emacs improved - auto-install of packages added
-
-  Updating text and contents on main org file
 
   #+end_example
 
@@ -71,15 +71,22 @@
 
    #+end_src
 
-#+RESULTS:
-: S.ficheros     Tamaño Usados  Disp Uso% Montado en
-: /dev/mmcblk0p3    30G    16G   14G  54% /
+   #+RESULTS:
+   : S.ficheros     Tamaño Usados  Disp Uso% Montado en
+   : /dev/sda7         39G    30G  9,3G  77% /
 
-I try to avoid bloated linux distros, but the most recent distros comes with at least ~ 15Gb, and, really, is quite a lot for a linux system.
-I love minimal installations ( I still remember the installations of Slackware that I made in my beloved Compaq Armada with 1Gb W95 + Slackware, nice uh? ).
+   I try to avoid bloated linux distros, but the most recent distros
+   comes with at least ~ 15Gb, and, really, is quite a lot for a linux
+   system.  I'm still loving minimal installations (old story spoiler
+   begin: I still remember the installations of Slackware that I made
+   in my beloved Compaq Armada with 1Gb W95 + Slackware, nice uh?
+   spoiler end).
 
-** Improvements [2/4]
+   
+** Improvements [2/5]
+   
    In this section I will record some taks and TODOs for future versions
+   
 *** DONE <2021-01-17 dom> Export configuration
 
     Configuration using gongzhintaao CSS that is enough for now, maybe we
@@ -88,9 +95,20 @@ I love minimal installations ( I still remember the installations of Slackware t
 *** DONE Backup Tools
      - <2021-12-29 mié> New code blocks on [[Tools][Tools section]] to patch
        configurations from current user to this project and viceversa.
+     - <2023-03-12 dom> I doubt that the patching is finished 100%
+       nowadays, but can be useful in some ways.
 *** TODO Auto-install scripts
 *** TODO Improve README on the project
-* This project
+*** TODO Improve SUDO literate parts
+     - <2023-03-12 dom> As some of codes are for installing sudo is
+       often required, it's no safe to execute elevated commands from
+       mostly any place without the proper knowledge, but I think an
+       improvement to allow it can be done. Some work has been done
+       following these ideas:
+        - https://emacs.stackexchange.com/questions/39158/how-to-execute-sudo-command-in-org-babel-in-relative-path-under-current-working
+	 
+     
+* About the project
 
   The structure that I want is a private repository (If you are
   reading this is because you colaborate or I decided that the project
@@ -125,11 +143,6 @@ I love minimal installations ( I still remember the installations of Slackware t
 
    - https://emacs.stackexchange.com/questions/233/how-to-proceed-on-package-el-signature-check-failure
 
-  This configuration project also is assuming that the target linux
-  installation uses 'apt' package manager. Because I also have som
-  systema on Fedora that uses 'dnf' package manager you may also find
-  some code to install most used packages.
-
   #+BEGIN_QUOTE
 
    This kind of errors may happen if you play too much with Emacs or
@@ -139,20 +152,83 @@ I love minimal installations ( I still remember the installations of Slackware t
 
   #+END_QUOTE
 
-** Installing git
+  This configuration is very important because will define which
+  package manager is using your system
+  
+  #+begin_src sh :session :dir "/sudo::/home/danioche/Projects" :cache no :results output
 
-   Welcome to 2021, it's time to do it! :). 
+    # Distro check:
+    #  - https://unix.stackexchange.com/questions/6345/how-can-i-get-distribution-name-and-version-number-in-a-simple-shell-script
+    if [ -f /etc/os-release ]; then
+	# freedesktop.org and systemd
+	. /etc/os-release
+	OS=$NAME
+	VER=$VERSION_ID
+    elif type lsb_release >/dev/null 2>&1; then
+	# linuxbase.org
+	OS=$(lsb_release -si)
+	VER=$(lsb_release -sr)
+    elif [ -f /etc/lsb-release ]; then
+	# For some versions of Debian/Ubuntu without lsb_release command
+	. /etc/lsb-release
+	OS=$DISTRIB_ID
+	VER=$DISTRIB_RELEASE
+    elif [ -f /etc/debian_version ]; then
+	# Older Debian/Ubuntu/etc.
+	OS=Debian
+	VER=$(cat /etc/debian_version)
+    elif [ -f /etc/SuSe-release ]; then
+	# Older SuSE/etc.
+	...
+    elif [ -f /etc/redhat-release ]; then
+	# Older Red Hat, CentOS, etc.
+	...
+    else
+	# Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
+	OS=$(uname -s)
+	VER=$(uname -r)
+    fi
 
-   The following command may be not fully working from this documentation, but you can
-   copy-paste to install it.
+    echo "Your distro is $OS ($VER)"
 
-   #+begin_src sh
+    case $OS in
+    "Fedora")
+	pckMang="dnf"
+	;;
+    "Ubuntu")
+	pckMang="apt-get"
+	;;
+    ,*)
+	pckMang="sorrybro"
+        ;;
+    esac
 
-   sudo apt-get install git
+    echo "I'm setting your Package Manager as: $pckMang"
+    echo "u r welcome!"
+
+  #+end_src 
+
+  #+RESULTS:
+  : Your distro is Fedora (33)
+  : I'm setting your Package Manager as: dnf
+  : u r welcome!
+
+** One MUST: Having git installed
+
+   Welcome to 202?, it's time to do it! :). 
+
+   The following command may be not fully working from this
+   documentation *sudo things*, but you can copy-paste to install it.
+
+   #+begin_src sh :session :dir "/sudo::/home/danioche/Projects" :cache no :results output
+
+     echo "Package Manager: $pckMang"
+     # $pckMang install git 
 
    #+end_src
 
    #+RESULTS:
+   : Package Manager: 
 
    If your Linux is brand new you may need to add your .rsa or create
    a new one for the nes OS, follow the instructions here:
@@ -162,10 +238,12 @@ I love minimal installations ( I still remember the installations of Slackware t
    Help info: 
    - https://help.github.com/articles/generating-a-gpg-key/
 
-/*Obviously*: If you don't have emacs installed and configured you will not be able to execute here the code above, so you may want to visit next section./
+   /*Obviously*: If you don't have emacs installed and configured you
+   will not be able to execute here the code above, so you may want to
+   visit next section./
 
 * Tools
-** EMACS
+** EMACS   
 *** Basics
     
     The main tool (a part from git :) for taking the most of this
@@ -184,7 +262,7 @@ I love minimal installations ( I still remember the installations of Slackware t
 
     #+end_src
 
-*** Spacemacs - When I fell in love
+*** Spacemacs - /...And then I fell in love with the emacs world/
     
     And the flavour that I --like-- liked most is the *spacemacs*
     https://www.spacemacs.org/
@@ -237,7 +315,8 @@ I love minimal installations ( I still remember the installations of Slackware t
 
 *** DOOM EMACS - The bloated evolution
     
-    I'm trying new things, after getting bored of watching DOOM Emacs videos, I just tought... let's try it!
+    I'm trying new things, after getting bored of watching DOOM Emacs
+    videos, I just tought... let's try it!
 
     Starting at: <2020-12-18 vie> ... we will see...
 
@@ -460,7 +539,7 @@ I love minimal installations ( I still remember the installations of Slackware t
    #+end_src 
 
    #+RESULTS: CleanPatches
-      
+
 * Terminal
 ** system
    This section is in which i recommend some system tools if not installed.
@@ -813,7 +892,6 @@ I love minimal installations ( I still remember the installations of Slackware t
       ,* Las direcciones indican dirección de procedencia
       ,* Valores obtenidos del punto de malla situado en lat: **38.3330** y lon: **-0.4170**
 
-
     ---  
 
     Alicante | Viento | Mar Total | Mar de Viento | Mar de Fondo 1 | Mar de Fondo
@@ -970,12 +1048,11 @@ I love minimal installations ( I still remember the installations of Slackware t
 
     #+end_example
     
-
 ** Fonts
-
 *** Source Code Pro
     
-    Source Code Pro is the default font for Emacs, and also is a nice font. Here is how to install it.
+    Source Code Pro is my default font for Emacs, and also is a nice
+    font. Here is how to install it.
 
     #+begin_src sh :results output
 
@@ -1128,6 +1205,7 @@ I love minimal installations ( I still remember the installations of Slackware t
     #+end_example
 
 * Productivity
+  
 ** Code snipets
 
    This is very useful, you can use skeleton (code in lisp) or you can
