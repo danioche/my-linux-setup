@@ -1,7 +1,6 @@
 Config {
        font = "xft:Source Code Pro:size=10,Hack:size=9,Font Awesome:size=9" ,
-       additionalFonts = ["xft: Font Awesome 5 Free Solid:pixelsize=12"
-   			, "xft:Font Awesome 5 Brands:pixelsize=12"] ,
+       additionalFonts = ["xft:FontAwesome:pixelsize=13"] ,
        bgColor = "black" , fgColor = "grey" , position = Top ,
        lowerOnStart = True ,
        commands = [
@@ -11,18 +10,29 @@ Config {
 		     "--normal","green",
 		     "--high","red",
 		     "-S","True",
-		     "--template","<rx> <tx>"] 10 ,
+		     "--template","<fn=1></fn><rx> <fn=1></fn><tx>"] 10 ,
 		Run MultiCpu
-       		    ["-L","3","-H","50","--normal","green","--high","red","-t","<fc=#04d9ff></fc> <bar>"] 10 ,
+		             [ "--template" , "<fc=#04d9ff></fc> <total0>%|<total1>%|<total2>|<total3>%"
+                             , "--Low"      , "50"         -- units: %
+                             , "--High"     , "85"         -- units: %
+                             , "--low"      , "green"
+                             , "--normal"   , "orange"
+                             , "--high"     , "red"
+                             ] 10,
 		Run Memory ["-t","<fc=#04d9ff></fc> <usedratio>%"] 10 ,
 		Run Swap ["-t","<fc=#04d9ff>S</fc> <usedratio>%"] 10 ,
-		Run DiskU [("/", "<used>/<size>"),  ("sda7", "<usedbar>")]               
+		Run DiskU [("/", "<used>/<size>")]               
                   ["-L", "20", "-H", "50", "-m", "1", "-p", "3",
                   "--normal", "grey50", "--high", "#a0522d",
                   "--low", "#2f4f4f"] 20,
 		Run Com "/home/danioche/.xmonad/get-Battery.sh" [] "myBatt" 60,
 		Run Com "/home/danioche/.xmonad/get-Weather.sh" [] "myWeather" 1800,
-       		Run Date "%a %b %_d %Y %H:%M:%S" "date" 10],
+       		Run Date "%a %b %_d %Y %H:%M:%S" "date" 10,
+		Run UnsafeStdinReader
+		],
 	sepChar= "%" ,
 	alignSep = "}{" ,
-	template = "%multicpu% | %memory% %swap% | <fc=#04d9ff></fc> %disku% | %wlp1s0% }<fc=#ee9a00> %date%</fc>{ %myWeather%|%myBatt%" }
+	template = "%UnsafeStdinReader% | %multicpu% | %memory% %swap% | <fc=#04d9ff></fc> %disku% | %wlp1s0% }<fc=#ee9a00> %date%</fc>{ %myWeather% | %myBatt%",
+	allDesktops = True,
+	overrideRedirect = False
+}

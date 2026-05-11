@@ -45,6 +45,8 @@
   #+begin_example
   Showing last 5 changes on the project:
   -----------------------------------------
+  Some improvements on pckMang pending
+
   Update from local
 
   Patches cleaned-up
@@ -52,8 +54,6 @@
   Backup and Restore Tool with diff/patch
 
   Dotfiles reorg and some patch tools
-
-  Weather scripts and Xmobar review, Added bottom bar in Xmonad cfg
 
   #+end_example
 
@@ -242,6 +242,7 @@
    will not be able to execute here the code above, so you may want to
    visit next section./
 
+
 * Tools
 ** EMACS   
 *** Basics
@@ -256,12 +257,13 @@
     document. Emacs is mainly the key-factor for many features and tricks
     that I'm doing in my everyday workflow stream.
 
+    #+comment: UBUNTU
     #+begin_src sh
 
       sudo apt-get install emacs
 
     #+end_src
-
+   
 *** Spacemacs - /...And then I fell in love with the emacs world/
     
     And the flavour that I --like-- liked most is the *spacemacs*
@@ -332,7 +334,7 @@
     mainly use: ORG, HUGO and some few things, so I preferred to have more
     minimalistic configuration.
 
-*** EMACS my own Config
+*** EMACS, the plain way:  my own Config
 
     Finally I found myself wanted something less bloated, more
     light. May be I will lose some functionallities but at least I
@@ -350,6 +352,7 @@
 
     This config uses some "art" 
 
+    #+comment: Spanish folder
     #+begin_src sh
 
     cp -vr ./art ~/Imágenes/art 
@@ -394,43 +397,43 @@
    https://www.shellhacks.com/create-patch-diff-command-linux/
 
    The stuff:
+
+   First of all we want to know if there are changes.
    
    #+name: mainChecks 
    #+begin_src sh :results output
 
-     echo "Checking local Xmonad config vs. this project config: "
+     echo "CHECKING FOR CHANGES to UPDATE THIS PROJECT WITH YOUR LOCAL INFO"
+     echo "Checking Xmonad repo config <original> vs. Your local config <updated>: "
      diff -rN --brief ./dotfiles/xmonad/.xmonad/ ~/.xmonad > checks.xmonad
      changes=`cat checks.xmonad | wc -l`
      echo ">>>Found $changes differences for Xmonad"
 
-     echo "Checking local Emacs config vs. this project config: "
+     echo "Checking Emacs repo config <original> vs. Your local config <upated>: "
      diff --brief ./dotfiles/emacs/.emacs ~/.emacs > checks.emacs
      changes=`cat checks.emacs | wc -l`
      echo ">>>Found $changes differences for .emacs"
 
-     echo "Checking local Xmobar config vs. this project config: "
+     echo "Checking Xmobar repo config <original> vs. Your local config <updated>: "
      diff --brief ./dotfiles/xmobar/.xmobarrc ~/.xmobarrc > checks.xmobarrc
      changes=`cat checks.xmobarrc | wc -l`
      echo ">>>Found $changes differences for .xmobarrc"
 
-
    #+end_src  
    #+RESULTS: mainChecks
-   : Checking local Xmonad config vs. this project config: 
-   : >>>Found 14 differences for Xmonad
-   : Checking local Emacs config vs. this project config: 
+   : CHECKING FOR CHANGES to UPDATE THIS PROJECT WITH YOUR LOCAL INFO
+   : Checking Xmonad repo config <original> vs. Your local config <updated>: 
+   : >>>Found 23 differences for Xmonad
+   : Checking Emacs repo config <original> vs. Your local config <upated>: 
    : >>>Found 1 differences for .emacs
-   : Checking local Xmobar config vs. this project config: 
+   : Checking Xmobar repo config <original> vs. Your local config <updated>: 
    : >>>Found 0 differences for .xmobarrc
 
-   With the following code block will generate patches for *UPDATING
-   this CONFIG stored on this project* with the ones modified on your
-   system, in other words *IT DOES a backup of your dotfiles inside
-   project dotfiles*.
    
-   #+NAME: PatchingDirectories
+   #+NAME: PatchingOrigin
    #+BEGIN_SRC sh :results output
 
+     
      echo "Building Patches/Backups if needed..."
      diff  -ruN ./dotfiles/xmonad/.xmonad ~/.xmonad > patch.xmonad
      patchXmonad=`cat patch.xmonad | wc -l`
@@ -456,11 +459,12 @@
    #+RESULTS: PatchingDirectories
    : Building Patches/Backups if needed...
    : >>> Patch for Xmonad ready: patch.xmonad 
+   : >>> Patch for Xmobarrc ready: patch.xmobarrc 
    : >>> Patch for Emacs ready: patch.emacs 
    : Fin.
 
    With the following code you can *restore your config files* from
-   the ones on this project.
+   the ones on THIS project/repo.
 
    #+NAME: RestoreDirectories
    #+BEGIN_SRC sh :results output
@@ -494,7 +498,7 @@
 
    How to apply the Patches.
 
-   Now this will up to you, the following code block is just an
+   *Now this will up to you*, the following code block is just an
    example no parametrization has been made because I do not want you
    blaming this beatiful org file because of your mistake :D.
 
